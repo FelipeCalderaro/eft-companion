@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 import 'package:tarkov_desktop/core/models/task_details/task_details_model.dart';
@@ -33,7 +31,7 @@ class WikiScraperService extends ScraperService {
     var tr = itemTable?.querySelectorAll('tr');
     // Remove the table Head
     tr?.removeAt(0);
-    // Remote the table columns Head
+    // Remove the table columns Head
     tr?.removeAt(0);
 
     List<QuestItem> items = [];
@@ -49,10 +47,14 @@ class WikiScraperService extends ScraperService {
       for (var element in aS) {
         title ??= element.attributes['title'];
       }
+      // Search for numbers inside the Table Row
+      // if one is parsed means that is the amount
       for (var element in tds) {
-        print(element.text.trim());
         quantity ??= int.tryParse(element.text.trim());
       }
+
+      /// Look for the text containing Yes, for now means
+      /// that must be found in raid
       for (var element in ths) {
         findInRaid = element.text.contains('Yes');
       }
@@ -80,7 +82,6 @@ class WikiScraperService extends ScraperService {
       texts: ps.map((p) => p.text).toList(),
       dialogue: dialogue,
     );
-    inspect(details);
     return details;
   }
 }

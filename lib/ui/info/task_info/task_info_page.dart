@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tarkov_desktop/core/models/task_details/task_details_model.dart';
-import 'package:tarkov_desktop/core/services/wiki_scraper.dart';
 import 'package:tarkov_desktop/core/utils/get_page_route.dart';
 import 'package:tarkov_desktop/ui/info/task_info/cubit/task_info_cubit.dart';
 import 'package:tarkov_desktop/ui/info/task_info/model/task_info_model.dart';
@@ -182,12 +181,6 @@ class TaskInfoPage extends StatelessWidget {
                         texts: details.texts,
                       ),
                     ),
-                  SliverToBoxAdapter(
-                    child: FloatingActionButton(onPressed: () {
-                      WikiScraperService()
-                          .scrapeGuideSection(info.task.wikiLink);
-                    }),
-                  )
                 ],
               ),
             ),
