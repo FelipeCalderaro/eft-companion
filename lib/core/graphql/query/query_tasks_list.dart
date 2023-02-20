@@ -1,0 +1,20 @@
+const String queryTasksList = r'''
+{
+  tasks{
+    id
+    name
+    kappaRequired
+    map{
+      id
+      name
+      nameId
+    }
+    trader{
+      id
+      imageLink
+      name
+      image4xLink
+    }
+  }
+}
+''';

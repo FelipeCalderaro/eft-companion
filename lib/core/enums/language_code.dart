@@ -1,0 +1,17 @@
+enum LanguageCode {
+  cs,
+  de,
+  en,
+  es,
+  fr,
+  hu,
+  it,
+  ja,
+  ko,
+  pl,
+  pt,
+  ru,
+  sk,
+  tr,
+  zh,
+}
