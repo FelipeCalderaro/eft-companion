@@ -8,7 +8,7 @@ part 'tasks_list_model.freezed.dart';
 part 'tasks_list_model.g.dart';
 
 @freezed
-class TasksList with _$TasksList {
+abstract class TasksList with _$TasksList {
   const factory TasksList({
     required List<Task> tasks,
   }) = _TasksList;
@@ -18,7 +18,7 @@ class TasksList with _$TasksList {
 }
 
 @freezed
-class Task with _$Task {
+abstract class Task with _$Task {
   const factory Task({
     required String id,
     required String name,
@@ -31,7 +31,7 @@ class Task with _$Task {
 }
 
 @freezed
-class MapClass with _$MapClass {
+abstract class MapClass with _$MapClass {
   const factory MapClass({
     required String id,
     required String name,
@@ -43,7 +43,7 @@ class MapClass with _$MapClass {
 }
 
 @freezed
-class Trader with _$Trader {
+abstract class Trader with _$Trader {
   const factory Trader({
     required String id,
     required String imageLink,

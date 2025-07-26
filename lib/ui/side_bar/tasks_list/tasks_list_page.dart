@@ -88,7 +88,7 @@ class TasksListPage extends SearchDelegate {
               child: GridView.builder(
                 controller: scrollController,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: calculateGridCrossCount(context, max: 5),
+                  crossAxisCount: calculateGridCrossCount(context, max: 7),
                   childAspectRatio:
                       GridUtils.calculateChildAspectRatioWithMinMax(
                     context,

@@ -1,4 +1,12 @@
 Map<String, MapImage> maps = {
+  "The Labyrinth": MapImage(
+    bidimentional: "https://tarkov.dev/maps/labyrinth-2d.jpg",
+    tridimentional: "https://tarkov.dev/maps/labyrinth-3d.jpg",
+  ),
+  "Ground Zero": MapImage(
+    bidimentional: "https://tarkov.dev/maps/ground-zero-2d.jpg",
+    tridimentional: "https://tarkov.dev/maps/ground-zero-3d.jpg",
+  ),
   "Customs": MapImage(
     bidimentional: "https://tarkov.dev/maps/customs-2d-monkix3.jpg",
     tridimentional: "https://tarkov.dev/maps/customs-3d.jpg",

@@ -3,7 +3,9 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  screen_retriever
+  flutter_acrylic
+  rive_common
+  screen_retriever_linux
   window_manager
 )
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tarkov_desktop/core/management/window_control.dart';
 import 'package:tarkov_desktop/ui/home/widgets/gear_and_items.dart';
 import 'package:tarkov_desktop/ui/home/widgets/search_box.dart';
 import 'package:tarkov_desktop/ui/theme/app_theme.dart';
@@ -9,6 +10,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        WindowControl.instance.toggleVisibility();
+      }),
       body: RawScrollbar(
         controller: scrollController,
         thumbColor: AppColors.brushedGold,
@@ -100,10 +104,14 @@ class ImageButton extends StatelessWidget {
                 fit: fit,
               ),
             ),
-            Text(
-              label,
-              style: AppTextStyle.regular,
-              textAlign: TextAlign.center,
+            SizedBox(
+              width: width * .8,
+              child: Text(
+                label,
+                overflow: TextOverflow.ellipsis,
+                style: AppTextStyle.regular,
+                textAlign: TextAlign.center,
+              ),
             )
           ],
         ),

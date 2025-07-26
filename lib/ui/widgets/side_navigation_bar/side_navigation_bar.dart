@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:tarkov_desktop/core/utils/get_page_route.dart';
+import 'package:tarkov_desktop/ui/backend_info/backend_info_page.dart';
 import 'package:tarkov_desktop/ui/side_bar/tasks_list/tasks_list_page.dart';
 import 'package:tarkov_desktop/ui/theme/app_theme.dart';
 
@@ -52,13 +54,14 @@ class _ClosedState extends StatelessWidget {
         ),
         Icon(Icons.search),
         Icon(Icons.filter_frames_rounded),
+        Icon(Icons.connected_tv)
       ],
     );
   }
 }
 
 class _ExpandedState extends StatelessWidget {
-  const _ExpandedState({Key? key}) : super(key: key);
+  const _ExpandedState({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +107,14 @@ class _ExpandedState extends StatelessWidget {
             "Tasks",
           ),
         ),
+        TextButton.icon(
+          onPressed: () => Navigator.of(context).push(getPageRoute(BackEndInfoPage())),
+          icon: const Icon(Icons.connected_tv),
+          label: const Text(
+            "Backend status",
+          ),
+        ),
+        
       ],
     );
   }

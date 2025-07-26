@@ -1,3 +1,4 @@
+import os
 from threading import Thread
 from fastapi import FastAPI, WebSocket, Response, WebSocketDisconnect
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
@@ -64,6 +65,7 @@ async def shutdown_server():
         logger.info(f"Current server state: {uvicorn_server_instance.server_state}")
         await uvicorn_server_instance.shutdown()
         logger.info("Server shutdown complete.")
+        os._exit(0)
 
 
 def start_uvicorn_server():
@@ -73,6 +75,7 @@ def start_uvicorn_server():
         host="0.0.0.0",
         port=12548,
         log_level="info",
+        log_config=log_service.get_uvicorn_log_config(),
     )
     uvicorn_server_instance = uvicorn.Server(config)
     try:

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:graphql/client.dart';
 import 'package:tarkov_desktop/core/graphql/query/query_task_info.dart';
 import 'package:tarkov_desktop/core/services/graphql_client.dart';
@@ -14,7 +16,8 @@ class TaskDatasource extends GraphQl implements TaskRepository {
 
     final response = await client.query(options);
 
-    if (response.hasException) {
+    inspect(response);
+    if (response.hasException || response.data == null) {
       throw Exception(
         response.exception?.linkException ??
             response.exception?.originalStackTrace,

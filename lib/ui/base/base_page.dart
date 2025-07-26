@@ -19,41 +19,43 @@ class _BasePageState extends State<BasePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppColors.white,
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      child: Row(
-        children: [
-          MouseRegion(
-            onEnter: (event) {
-              // if the default is closed
-              if (!sideNavigationDefaultState) {
-                // then, open
-                setState(() => sideNavigationExpanded = true);
-              }
-            },
-            // returns to the default state
-            onExit: (event) => setState(
-              () => sideNavigationExpanded = sideNavigationDefaultState,
+    return Scaffold(
+      body: Container(
+        color: AppColors.white,
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Row(
+          children: [
+            MouseRegion(
+              onEnter: (event) {
+                // if the default is closed
+                if (!sideNavigationDefaultState) {
+                  // then, open
+                  setState(() => sideNavigationExpanded = true);
+                }
+              },
+              // returns to the default state
+              onExit: (event) => setState(
+                () => sideNavigationExpanded = sideNavigationDefaultState,
+              ),
+              child: SideNavigationBar(
+                animationsDuration: 100.ms,
+                width: sideNavigationExpanded
+                    ? sideNavigationExpandedWidth
+                    : sideNavigationClosedWidth,
+                isExpanded: sideNavigationExpanded,
+              ),
             ),
-            child: SideNavigationBar(
-              animationsDuration: 100.ms,
-              width: sideNavigationExpanded
-                  ? sideNavigationExpandedWidth
-                  : sideNavigationClosedWidth,
-              isExpanded: sideNavigationExpanded,
+            Expanded(
+              // child: Navigator(
+              //   restorationScopeId: "nv1.navigator.restoration.scope",
+              //   initialRoute: "/",
+              //   onGenerateRoute: onGenerateRoute,
+              // ),
+              child: MultiTabPage(page: HomePage()),
             ),
-          ),
-          Expanded(
-            // child: Navigator(
-            //   restorationScopeId: "nv1.navigator.restoration.scope",
-            //   initialRoute: "/",
-            //   onGenerateRoute: onGenerateRoute,
-            // ),
-            child: MultiTabPage(page: HomePage()),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

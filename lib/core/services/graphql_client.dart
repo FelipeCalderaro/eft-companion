@@ -1,7 +1,7 @@
 import 'package:graphql/client.dart';
 
 class GraphQl {
-  static String get _link => "https://api.tarkov.dev";
+  static String get _link => "https://api.tarkov.dev/graphql";
   final GraphQLClient client = GraphQLClient(
     link: HttpLink(
       _link,

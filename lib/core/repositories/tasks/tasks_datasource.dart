@@ -9,6 +9,7 @@ class TasksDatasource extends GraphQl implements TasksRepository {
   Future<TasksList> loadTasks() async {
     final QueryOptions options = QueryOptions(document: gql(queryTasksList));
     final response = await client.query(options);
+
     if (response.hasException) {
       throw Exception(
         response.exception?.linkException ??

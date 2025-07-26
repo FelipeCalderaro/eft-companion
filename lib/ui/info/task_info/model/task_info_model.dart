@@ -8,7 +8,7 @@ part 'task_info_model.freezed.dart';
 part 'task_info_model.g.dart';
 
 @freezed
-class TaskInfo with _$TaskInfo {
+abstract class TaskInfo with _$TaskInfo {
   const factory TaskInfo({
     required TaskInfoTask task,
   }) = _TaskInfo;
@@ -18,7 +18,7 @@ class TaskInfo with _$TaskInfo {
 }
 
 @freezed
-class TaskInfoTask with _$TaskInfoTask {
+abstract class TaskInfoTask with _$TaskInfoTask {
   const factory TaskInfoTask({
     required String id,
     required String name,
@@ -42,7 +42,7 @@ class TaskInfoTask with _$TaskInfoTask {
 }
 
 @freezed
-class NeededKey with _$NeededKey {
+abstract class NeededKey with _$NeededKey {
   const factory NeededKey({
     List<Key>? keys,
   }) = _NeededKey;
@@ -52,7 +52,7 @@ class NeededKey with _$NeededKey {
 }
 
 @freezed
-class Key with _$Key {
+abstract class Key with _$Key {
   const factory Key({
     required String id,
     required String name,
@@ -73,7 +73,7 @@ class Key with _$Key {
 }
 
 @freezed
-class FailureOutcome with _$FailureOutcome {
+abstract class FailureOutcome with _$FailureOutcome {
   const factory FailureOutcome({
     required List<dynamic> traderStanding,
     required List<dynamic> offerUnlock,
@@ -84,7 +84,7 @@ class FailureOutcome with _$FailureOutcome {
 }
 
 @freezed
-class FinishRewards with _$FinishRewards {
+abstract class FinishRewards with _$FinishRewards {
   const factory FinishRewards({
     required List<FinishRewardsItem> items,
   }) = _FinishRewards;
@@ -94,7 +94,7 @@ class FinishRewards with _$FinishRewards {
 }
 
 @freezed
-class BartersFor with _$BartersFor {
+abstract class BartersFor with _$BartersFor {
   const factory BartersFor({
     required String id,
     required BartersForTrader trader,
@@ -105,7 +105,7 @@ class BartersFor with _$BartersFor {
 }
 
 @freezed
-class BartersForTrader with _$BartersForTrader {
+abstract class BartersForTrader with _$BartersForTrader {
   const factory BartersForTrader({
     required String id,
     required String name,
@@ -118,7 +118,7 @@ class BartersForTrader with _$BartersForTrader {
 }
 
 @freezed
-class FinishRewardsItem with _$FinishRewardsItem {
+abstract class FinishRewardsItem with _$FinishRewardsItem {
   const factory FinishRewardsItem({
     required ItemItem item,
     required int quantity,
@@ -129,7 +129,7 @@ class FinishRewardsItem with _$FinishRewardsItem {
 }
 
 @freezed
-class ItemItem with _$ItemItem {
+abstract class ItemItem with _$ItemItem {
   const factory ItemItem({
     required String id,
     required String name,
@@ -142,7 +142,7 @@ class ItemItem with _$ItemItem {
 }
 
 @freezed
-class MapClass with _$MapClass {
+abstract class MapClass with _$MapClass {
   const factory MapClass({
     required String id,
     required String name,
@@ -159,7 +159,7 @@ class MapClass with _$MapClass {
 }
 
 @freezed
-class BossElement with _$BossElement {
+abstract class BossElement with _$BossElement {
   const factory BossElement({
     required int spawnTime,
     required double spawnChance,
@@ -175,7 +175,7 @@ class BossElement with _$BossElement {
 }
 
 @freezed
-class BossBoss with _$BossBoss {
+abstract class BossBoss with _$BossBoss {
   const factory BossBoss({
     required String id,
     required String name,
@@ -190,7 +190,7 @@ class BossBoss with _$BossBoss {
 }
 
 @freezed
-class Equipment with _$Equipment {
+abstract class Equipment with _$Equipment {
   const factory Equipment({
     required EquipmentItem item,
     required List<Attribute> attributes,
@@ -201,7 +201,7 @@ class Equipment with _$Equipment {
 }
 
 @freezed
-class Attribute with _$Attribute {
+abstract class Attribute with _$Attribute {
   const factory Attribute({
     required String name,
     required String value,
@@ -212,7 +212,7 @@ class Attribute with _$Attribute {
 }
 
 @freezed
-class EquipmentItem with _$EquipmentItem {
+abstract class EquipmentItem with _$EquipmentItem {
   const factory EquipmentItem({
     required String id,
     required List<ContainsItem> containsItems,
@@ -223,7 +223,7 @@ class EquipmentItem with _$EquipmentItem {
 }
 
 @freezed
-class ContainsItem with _$ContainsItem {
+abstract class ContainsItem with _$ContainsItem {
   const factory ContainsItem({
     required ContainsItemItem item,
   }) = _ContainsItem;
@@ -233,7 +233,7 @@ class ContainsItem with _$ContainsItem {
 }
 
 @freezed
-class ContainsItemItem with _$ContainsItemItem {
+abstract class ContainsItemItem with _$ContainsItemItem {
   const factory ContainsItemItem({
     required String id,
   }) = _ContainsItemItem;
@@ -243,7 +243,7 @@ class ContainsItemItem with _$ContainsItemItem {
 }
 
 @freezed
-class Health with _$Health {
+abstract class Health with _$Health {
   const factory Health({
     required String id,
     required int max,
@@ -254,7 +254,7 @@ class Health with _$Health {
 }
 
 @freezed
-class Escort with _$Escort {
+abstract class Escort with _$Escort {
   const factory Escort({
     required EscortBoss boss,
   }) = _Escort;
@@ -263,7 +263,7 @@ class Escort with _$Escort {
 }
 
 @freezed
-class EscortBoss with _$EscortBoss {
+abstract class EscortBoss with _$EscortBoss {
   const factory EscortBoss({
     required String id,
     required String name,
@@ -278,7 +278,7 @@ class EscortBoss with _$EscortBoss {
 }
 
 @freezed
-class SpawnLocation with _$SpawnLocation {
+abstract class SpawnLocation with _$SpawnLocation {
   const factory SpawnLocation({
     required String name,
     required double chance,
@@ -289,7 +289,7 @@ class SpawnLocation with _$SpawnLocation {
 }
 
 @freezed
-class Objective with _$Objective {
+abstract class Objective with _$Objective {
   const factory Objective({
     required String id,
     required bool optional,
@@ -303,7 +303,7 @@ class Objective with _$Objective {
 }
 
 @freezed
-class TaskElement with _$TaskElement {
+abstract class TaskElement with _$TaskElement {
   const factory TaskElement({
     required String id,
     required String name,
@@ -314,7 +314,7 @@ class TaskElement with _$TaskElement {
 }
 
 @freezed
-class StartRewards with _$StartRewards {
+abstract class StartRewards with _$StartRewards {
   const factory StartRewards({
     required List<dynamic> items,
   }) = _StartRewards;
@@ -324,7 +324,7 @@ class StartRewards with _$StartRewards {
 }
 
 @freezed
-class TaskRequirement with _$TaskRequirement {
+abstract class TaskRequirement with _$TaskRequirement {
   const factory TaskRequirement({
     required TaskElement task,
     required List<String> status,
@@ -335,7 +335,7 @@ class TaskRequirement with _$TaskRequirement {
 }
 
 @freezed
-class Trader with _$Trader {
+abstract class Trader with _$Trader {
   const factory Trader({
     required String id,
     required String name,
@@ -348,7 +348,7 @@ class Trader with _$Trader {
 }
 
 @freezed
-class Level with _$Level {
+abstract class Level with _$Level {
   const factory Level({
     required String id,
     required int requiredCommerce,

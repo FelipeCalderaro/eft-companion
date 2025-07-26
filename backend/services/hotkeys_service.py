@@ -14,6 +14,7 @@ class HotkeysService(BaseService):
         self.websocket = None
         self.listeners_active = False
         self.logger.info(f"{self.__class__.__name__} initialized")
+        self.registered_hotkeys = []
 
     def start(self, websocket: WebSocket):
         """Start the HotkeysService by registering hotkeys and starting key listeners.
@@ -41,6 +42,14 @@ class HotkeysService(BaseService):
             except Exception as e:
                 self.logger.exception(f"[{self.__class__.__name__}] Error while sending event '{event}'")
     
+    def clear_registered_hotkeys(self):
+        """Clear all registered hotkeys."""
+        self.logger.debug("Clearing all registered hotkeys.")
+        for hotkey in self.registered_hotkeys:
+            keyboard.remove_hotkey(hotkey)
+        self.registered_hotkeys.clear()
+        self.logger.info("All registered hotkeys cleared successfully.")
+
     def register_hotkey(self, hotkey: str, callback: callable, args: tuple = ()):
         """Register a hotkey with a callback function.
 
@@ -50,14 +59,15 @@ class HotkeysService(BaseService):
             args (tuple, optional): Arguments to pass to the callback. Defaults to ().
         """
         self.logger.debug(f"Registering hotkey: {hotkey}")
-        keyboard.add_hotkey(hotkey, callback, args)
+        registered = keyboard.add_hotkey(hotkey, callback, args)
+        self.registered_hotkeys.append(registered)
         self.logger.info(f"Hotkey '{hotkey}' registered.")
 
     def register_all_hotkeys(self):
         """Register custom hotkeys to send specific events."""
         self.logger.debug("Registering default hotkeys.")
-        self.register_hotkey("lctrl+shift", lambda: asyncio.run(self._send_event(Events.TOGGLE_VISIBILITY.value)))
-        self.register_hotkey("lctrl+alt+=", lambda: asyncio.run(self._send_event(Events.TOGGLE_MOVEMENT.value)))
+        self.register_hotkey("ctrl+caps lock", lambda: asyncio.run(self._send_event(Events.TOGGLE_VISIBILITY.value)))
+        self.register_hotkey("ctrl+alt+=", lambda: asyncio.run(self._send_event(Events.TOGGLE_MOVEMENT.value)))
 
         self.logger.info("Default hotkeys registered successfully.")
 

@@ -8,7 +8,7 @@ part 'armor_list_model.freezed.dart';
 part 'armor_list_model.g.dart';
 
 @freezed
-class ArmorList with _$ArmorList {
+abstract class ArmorList with _$ArmorList {
   const factory ArmorList({
     required List<Armor> items,
   }) = _ArmorList;
@@ -18,7 +18,7 @@ class ArmorList with _$ArmorList {
 }
 
 @freezed
-class Armor with _$Armor {
+abstract class Armor with _$Armor {
   const factory Armor({
     required String id,
     String? name,
@@ -35,7 +35,7 @@ class Armor with _$Armor {
 }
 
 @freezed
-class Properties with _$Properties {
+abstract class Properties with _$Properties {
   const factory Properties({
     @JsonKey(name: "class") int? armorClass,
     int? durability,
@@ -48,7 +48,7 @@ class Properties with _$Properties {
 }
 
 @freezed
-class Material with _$Material {
+abstract class Material with _$Material {
   const factory Material({
     String? id,
     String? name,

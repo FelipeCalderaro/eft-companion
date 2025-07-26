@@ -8,7 +8,7 @@ part 'ammo_list.freezed.dart';
 part 'ammo_list.g.dart';
 
 @freezed
-class AmmoList with _$AmmoList {
+abstract class AmmoList with _$AmmoList {
   const factory AmmoList({
     required List<Ammo> ammo,
   }) = _AmmoList;
@@ -18,7 +18,7 @@ class AmmoList with _$AmmoList {
 }
 
 @freezed
-class Ammo with _$Ammo {
+abstract class Ammo with _$Ammo {
   const factory Ammo({
     required String ammoType,
     required int damage,
@@ -33,7 +33,7 @@ class Ammo with _$Ammo {
 }
 
 @freezed
-class Item with _$Item {
+abstract class Item with _$Item {
   const factory Item({
     required String id,
     String? name,

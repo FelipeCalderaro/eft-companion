@@ -1,16 +1,78 @@
-# tarkov_desktop
 
-A new Flutter project.
+# Flutter Desktop App with Python Backend
 
-## Getting Started
+This project combines a Flutter Windows app with a Python backend bundled as a standalone executable using `PyInstaller`.
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## 📦 Requirements
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [Flutter](https://docs.flutter.dev/get-started/install)
+- Python 3.12+
+- `PyInstaller`: Install via `pip install pyinstaller`
+- [Inno Setup](https://jrsoftware.org/isdl.php) (for generating the installer)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## 📁 Project Structure
+
+```
+/
+├── backend/
+│   ├── main.py
+│   └── dist/
+│       └── main.exe  ← MUST be included before building the installer
+├── flutter/
+│   └── (Flutter Windows app)
+├── build.bat         ← Use this to build everything
+├── installer.iss     ← Inno Setup script
+└── README.md
+
+````
+
+---
+
+## 🚀 How to Build the App
+
+Run the batch script:
+
+```bat
+build.bat
+````
+
+This will:
+
+1. Compile the Python backend into `backend.exe`
+2. Move `backend.exe` into the correct Flutter build output directory
+3. Build the Flutter Windows executable
+4. Prepare everything for the installer
+
+---
+
+## 📦 Creating the Installer with Inno Setup
+
+> Make sure [Inno Setup](https://jrsoftware.org/isdl.php) is installed.
+
+### 🛠 Manual Steps
+
+1. Open `installer.iss` in **Inno Setup Compiler**
+2. Verify the following:
+
+   * `AppName`
+   * `AppVersion`
+   * `DefaultDirName`
+   * `Source` paths in `[Files]` section include:
+
+     * Flutter build output (usually `build/windows/runner/Release/`)
+     * `backend.exe` must be in this folder
+3. Click **Build → Compile**
+4. After compiling, find the installer `.exe` in the `Output` folder
+
+---
+
+## 📎 Notes
+
+* `main.exe` must be present in `./backend/dist/` before running Inno Setup.
+* `backend.exe` is automatically moved to the Flutter output folder during build.
+* You can customize `installer.iss` to include desktop/start menu shortcuts, icons, and license agreement.
+

@@ -45,3 +45,10 @@ app.*.map.json
 
 # FVM Version Cache
 .fvm/
+# Rust build
+*.exe
+.fingerprint
+deps/
+incremental/
+build/
+!build/release/

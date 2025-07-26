@@ -60,13 +60,13 @@ class TaskInfoPage extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       height: info.task.map != null ? 500 : 300,
                       decoration: BoxDecoration(
-                        color: AppColors.background.withOpacity(.6),
+                        color: AppColors.background.withOpacity(1),
                         image: info.task.map != null
                             ? DecorationImage(
-                                opacity: .4,
+                                opacity: .1,
                                 image: NetworkImage(
-                                  maps[info.task.map!.name]!.tridimentional ??
-                                      maps[info.task.map!.name]!.bidimentional,
+                                  maps[info.task.map!.name]?.tridimentional ??
+                                      maps[info.task.map!.name]?.bidimentional ?? "",
                                 ),
                                 fit: BoxFit.fitWidth,
                               )
@@ -130,7 +130,7 @@ class TaskInfoPage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 ZoomImageOnHover(
-                                  url: maps[info.task.map!.name]!.bidimentional,
+                                  url: maps[info.task.map!.name]?.bidimentional ?? "",
                                   heroRandomNumber: Random().nextInt(10),
                                   width: 360,
                                   height: 200,
@@ -380,7 +380,7 @@ class _ZoomImageOnHoverState extends State<ZoomImageOnHover> {
             child: InkWell(
               onTap: () => overlayEntry?.remove(),
               splashColor: Colors.transparent,
-              overlayColor: const MaterialStatePropertyAll(
+              overlayColor: const WidgetStatePropertyAll(
                 Colors.transparent,
               ),
               child: SizedBox(

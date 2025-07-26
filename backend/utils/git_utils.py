@@ -9,4 +9,5 @@ def get_git_version():
         version = f"{tag}+{commit_hash}"
         return version
     except subprocess.CalledProcessError:
-        return config('VERSION')
+        return config('VERSION', default="1.0.0")
+    
