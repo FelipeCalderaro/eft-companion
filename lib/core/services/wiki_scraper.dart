@@ -1,8 +1,8 @@
+import 'package:collection/collection.dart';
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 import 'package:tarkov_desktop/core/models/task_details/task_details_model.dart';
 import 'package:tarkov_desktop/core/services/http_service.dart';
-import 'package:collection/collection.dart';
 
 class WikiScraperService extends ScraperService {
   Future<TaskDetails> scrapeGuideSection(String url) async {
@@ -25,7 +25,8 @@ class WikiScraperService extends ScraperService {
     ps.removeWhere((p) => p.text.toLowerCase().contains("is a quest"));
     for (var box in galleryBox) {
       ps.removeWhere(
-          (p) => p.text.toLowerCase().trim() == box.text.toLowerCase().trim());
+        (p) => p.text.toLowerCase().trim() == box.text.toLowerCase().trim(),
+      );
     }
     var itemTable = document.querySelector('table.wikitable');
     var tr = itemTable?.querySelectorAll('tr');

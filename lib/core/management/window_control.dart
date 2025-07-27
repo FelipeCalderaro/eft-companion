@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_acrylic/window.dart';
-import 'package:flutter_acrylic/window_effect.dart';
 import 'package:tarkov_desktop/core/constants.dart';
 import 'package:tarkov_desktop/ui/theme/app_theme.dart';
 import 'package:win32/win32.dart';
@@ -14,27 +12,46 @@ class WindowControl {
   WindowManager mng = WindowManager.instance;
   final String title = Constants.appName;
 
-  final Size initialWindowsSize = const Size(1215.6, 800);
   bool isShowing = true;
-  bool movementEnabled = true;
+  bool movementEnabled = false;
   bool mousePassthrough = false;
   bool isOverlayMode = false;
   int screenHeight = 0;
   int screenWidth = 0;
+  final Size initialWindowsSize = const Size(1215.6, 800);
 
   Future<void> startUp() async {
     SetProcessDpiAwareness(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
     screenHeight = GetSystemMetrics(SM_CXVIRTUALSCREEN);
     screenWidth = GetSystemMetrics(SM_CYVIRTUALSCREEN);
     await mng.ensureInitialized();
-    await mng.setBackgroundColor(AppColors.background);
+    // await mng.setBackgroundColor(AppColors.background);
+
     await mng.setTitle(title);
     await mng.setAlignment(Alignment.center);
-    await mng.setSize(initialWindowsSize);
-    await mng.setMinimumSize(const Size(500, 400));
+    await mng.setMinimumSize(
+      Size(screenWidth * (1 / 3), screenHeight * (1 / 3)),
+    );
+
+    // Set App Size
+    await mng.setFullScreen(true);
     await mng.setAlwaysOnTop(true);
-    await mng.setTitleBarStyle(TitleBarStyle.normal);
-    await mng.setIgnoreMouseEvents(!movementEnabled, forward: false);
+    await mng.setTitleBarStyle(TitleBarStyle.hidden);
+    await mng.setBackgroundColor(Colors.transparent);
+    // await mng.setBackgroundColor(Colors.black.withAlpha(1));
+
+    await mng.setSize(Size(screenWidth.toDouble(), screenHeight.toDouble()));
+
+    // await mng.setHasShadow(false);
+    // await mng.setAsFrameless();
+    // await mng.setAlwaysOnTop(true);
+
+    /// Wait for Flutter to build the first frame, then enable passthrough
+    /// If this isn't done the OS will not draw anything
+    Future.delayed(Duration(seconds: 5), () async {
+      print("ignoring mouse");
+      await mng.setIgnoreMouseEvents(true, forward: true);
+    });
   }
 
   Future<void> moveWindow(Offset movementOffset) async {
@@ -87,41 +104,17 @@ class WindowControl {
     isShowing = !isShowing;
   }
 
-  Future<void> toggleMousePassthrough({bool passthrough = false}) async {
-    if (mousePassthrough == passthrough) {
-      return;
-    } else {
-      mousePassthrough = passthrough;
-    }
-    if (passthrough) {
-      await mng.setIgnoreMouseEvents(false, forward: false);
-      await mng.setOpacity(.8);
-      await mng.setHasShadow(true);
-      await Window.setEffect(
-        effect: WindowEffect.acrylic,
-        color: Colors.deepPurple.withOpacity(.2),
-      );
-    } else {
+  Future<void> toggleMousePassthrough() async {
+    if (mousePassthrough) {
       await mng.setIgnoreMouseEvents(true, forward: false);
+      // await mng.setBackgroundColor(Colors.transparent);
       await mng.setOpacity(1);
-      await mng.setHasShadow(false);
-      await Window.setEffect(effect: WindowEffect.disabled);
-      await mng.setBackgroundColor(Colors.transparent);
-      await mng.setTitleBarStyle(TitleBarStyle.normal);
-      await mng.setAsFrameless();
-    }
-  }
-
-  Future<void> toggleMovement() async {
-    if (movementEnabled) {
-      await mng.setTitleBarStyle(TitleBarStyle.normal);
-      await mng.setIgnoreMouseEvents(false, forward: false);
     } else {
-      await mng.setAsFrameless();
-      await mng.setIgnoreMouseEvents(true, forward: true);
+      // await mng.setBackgroundColor(Color.fromRGBO(0, 0, 0, 0.1));
+      await mng.setOpacity(.1);
+      await mng.setHasShadow(false);
+      await mng.setIgnoreMouseEvents(false, forward: false);
     }
-    movementEnabled = !movementEnabled;
+    mousePassthrough = !mousePassthrough;
   }
-
-  // Future<void> toggle
 }

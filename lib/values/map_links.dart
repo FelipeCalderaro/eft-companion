@@ -8,7 +8,7 @@ Map<String, MapImage> maps = {
     tridimentional: "https://tarkov.dev/maps/ground-zero-3d.jpg",
   ),
   "Customs": MapImage(
-    bidimentional: "https://tarkov.dev/maps/customs-2d-monkix3.jpg",
+    bidimentional: "https://tarkov.dev/maps/customs-2d.jpg",
     tridimentional: "https://tarkov.dev/maps/customs-3d.jpg",
     cardinal: "https://tarkov.dev/maps/customs-2d.jpg",
     extra: "https://tarkov.dev/maps/customs-2d-dorms.jpg",
@@ -45,16 +45,14 @@ Map<String, MapImage> maps = {
     bidimentional: "https://tarkov.dev/maps/streets-2d.jpg",
     tridimentional: "https://tarkov.dev/maps/streets-3d.jpg",
   ),
-  "The Lab": MapImage(
-    bidimentional: "https://tarkov.dev/maps/labs-2d.jpg",
-  ),
+  "The Lab": MapImage(bidimentional: "https://tarkov.dev/maps/labs-2d.jpg"),
   "Woods": MapImage(
     tridimentional: "https://tarkov.dev/maps/woods-3d.jpg",
     bidimentional: "https://tarkov.dev/maps/woods-2d.jpg",
   ),
   "Openworld": MapImage(
     bidimentional: "https://tarkov.dev/maps/openworld-2d.jpg",
-  )
+  ),
 };
 
 class MapImage {

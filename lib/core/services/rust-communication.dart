@@ -31,9 +31,7 @@ enum Keys {
 }
 
 class HotkeysRustFFI {
-  static final DynamicLibrary _lib = DynamicLibrary.open(
-    'backend-rust/target/release/backend_rust.dll',
-  );
+  static final DynamicLibrary _lib = DynamicLibrary.open('backend_rust.dll');
 
   static final void Function(Pointer<Utf8>) _registerHotkey = _lib
       .lookupFunction<

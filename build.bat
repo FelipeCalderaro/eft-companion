@@ -1,19 +1,6 @@
 @echo off
 setlocal
 
-echo ===== Building Python backend =====
-cd backend
-python -m PyInstaller --noconfirm --windowed --onefile main.py
-
-if not exist dist\main.exe (
-    echo ERROR: Python build failed. main.exe not found.
-    exit /b 1
-)
-
-echo Renaming and moving backend.exe...
-copy /Y dist\main.exe backend.exe
-cd ..
-
 echo ===== Building Flutter app =====
 flutter build windows
 if errorlevel 1 (
@@ -21,9 +8,20 @@ if errorlevel 1 (
     exit /b 1
 )
 
-echo ===== Moving backend.exe to Flutter output =====
+echo ===== Building Rust backend =====
+cd backend-rust
+cargo build --release
+
+if not exist target\release\backend_rust.dll (
+    echo ERROR: Rust build failed. backend_rust.dll not found.
+    exit /b 1
+)
+cd ..
+
+
+echo ===== Moving backend_rust.dll to Flutter output =====
 set FLUTTER_OUT=build\windows\x64\runner\Release
-move /Y backend\backend.exe %FLUTTER_OUT%\backend.exe
+move /Y backend-rust\target\release\backend_rust.dll %FLUTTER_OUT%\backend_rust.dll
 
 
 echo ===== All build steps completed =====

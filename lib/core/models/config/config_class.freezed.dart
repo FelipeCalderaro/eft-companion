@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ConfigClass {
 
-@JsonKey(name: "hotkeys") Map<Events, List<Keys>> get hotkeys;
+@JsonKey(name: "hotkeys") Map<Events, List<Keys>> get hotkeys;@JsonKey(name: "components") List<DraggableComponentSettings> get componentSettings;
 /// Create a copy of ConfigClass
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $ConfigClassCopyWith<ConfigClass> get copyWith => _$ConfigClassCopyWithImpl<Conf
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConfigClass&&const DeepCollectionEquality().equals(other.hotkeys, hotkeys));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConfigClass&&const DeepCollectionEquality().equals(other.hotkeys, hotkeys)&&const DeepCollectionEquality().equals(other.componentSettings, componentSettings));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(hotkeys));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(hotkeys),const DeepCollectionEquality().hash(componentSettings));
 
 @override
 String toString() {
-  return 'ConfigClass(hotkeys: $hotkeys)';
+  return 'ConfigClass(hotkeys: $hotkeys, componentSettings: $componentSettings)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $ConfigClassCopyWith<$Res>  {
   factory $ConfigClassCopyWith(ConfigClass value, $Res Function(ConfigClass) _then) = _$ConfigClassCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "hotkeys") Map<Events, List<Keys>> hotkeys
+@JsonKey(name: "hotkeys") Map<Events, List<Keys>> hotkeys,@JsonKey(name: "components") List<DraggableComponentSettings> componentSettings
 });
 
 
@@ -65,10 +65,11 @@ class _$ConfigClassCopyWithImpl<$Res>
 
 /// Create a copy of ConfigClass
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? hotkeys = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? hotkeys = null,Object? componentSettings = null,}) {
   return _then(_self.copyWith(
 hotkeys: null == hotkeys ? _self.hotkeys : hotkeys // ignore: cast_nullable_to_non_nullable
-as Map<Events, List<Keys>>,
+as Map<Events, List<Keys>>,componentSettings: null == componentSettings ? _self.componentSettings : componentSettings // ignore: cast_nullable_to_non_nullable
+as List<DraggableComponentSettings>,
   ));
 }
 
@@ -153,10 +154,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: "hotkeys")  Map<Events, List<Keys>> hotkeys)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: "hotkeys")  Map<Events, List<Keys>> hotkeys, @JsonKey(name: "components")  List<DraggableComponentSettings> componentSettings)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ConfigClass() when $default != null:
-return $default(_that.hotkeys);case _:
+return $default(_that.hotkeys,_that.componentSettings);case _:
   return orElse();
 
 }
@@ -174,10 +175,10 @@ return $default(_that.hotkeys);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: "hotkeys")  Map<Events, List<Keys>> hotkeys)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: "hotkeys")  Map<Events, List<Keys>> hotkeys, @JsonKey(name: "components")  List<DraggableComponentSettings> componentSettings)  $default,) {final _that = this;
 switch (_that) {
 case _ConfigClass():
-return $default(_that.hotkeys);case _:
+return $default(_that.hotkeys,_that.componentSettings);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +195,10 @@ return $default(_that.hotkeys);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: "hotkeys")  Map<Events, List<Keys>> hotkeys)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: "hotkeys")  Map<Events, List<Keys>> hotkeys, @JsonKey(name: "components")  List<DraggableComponentSettings> componentSettings)?  $default,) {final _that = this;
 switch (_that) {
 case _ConfigClass() when $default != null:
-return $default(_that.hotkeys);case _:
+return $default(_that.hotkeys,_that.componentSettings);case _:
   return null;
 
 }
@@ -209,7 +210,7 @@ return $default(_that.hotkeys);case _:
 @JsonSerializable()
 
 class _ConfigClass implements ConfigClass {
-  const _ConfigClass({@JsonKey(name: "hotkeys") required final  Map<Events, List<Keys>> hotkeys}): _hotkeys = hotkeys;
+  const _ConfigClass({@JsonKey(name: "hotkeys") required final  Map<Events, List<Keys>> hotkeys, @JsonKey(name: "components") required final  List<DraggableComponentSettings> componentSettings}): _hotkeys = hotkeys,_componentSettings = componentSettings;
   factory _ConfigClass.fromJson(Map<String, dynamic> json) => _$ConfigClassFromJson(json);
 
  final  Map<Events, List<Keys>> _hotkeys;
@@ -217,6 +218,13 @@ class _ConfigClass implements ConfigClass {
   if (_hotkeys is EqualUnmodifiableMapView) return _hotkeys;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableMapView(_hotkeys);
+}
+
+ final  List<DraggableComponentSettings> _componentSettings;
+@override@JsonKey(name: "components") List<DraggableComponentSettings> get componentSettings {
+  if (_componentSettings is EqualUnmodifiableListView) return _componentSettings;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_componentSettings);
 }
 
 
@@ -233,16 +241,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ConfigClass&&const DeepCollectionEquality().equals(other._hotkeys, _hotkeys));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ConfigClass&&const DeepCollectionEquality().equals(other._hotkeys, _hotkeys)&&const DeepCollectionEquality().equals(other._componentSettings, _componentSettings));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_hotkeys));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_hotkeys),const DeepCollectionEquality().hash(_componentSettings));
 
 @override
 String toString() {
-  return 'ConfigClass(hotkeys: $hotkeys)';
+  return 'ConfigClass(hotkeys: $hotkeys, componentSettings: $componentSettings)';
 }
 
 
@@ -253,7 +261,7 @@ abstract mixin class _$ConfigClassCopyWith<$Res> implements $ConfigClassCopyWith
   factory _$ConfigClassCopyWith(_ConfigClass value, $Res Function(_ConfigClass) _then) = __$ConfigClassCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "hotkeys") Map<Events, List<Keys>> hotkeys
+@JsonKey(name: "hotkeys") Map<Events, List<Keys>> hotkeys,@JsonKey(name: "components") List<DraggableComponentSettings> componentSettings
 });
 
 
@@ -270,10 +278,11 @@ class __$ConfigClassCopyWithImpl<$Res>
 
 /// Create a copy of ConfigClass
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? hotkeys = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? hotkeys = null,Object? componentSettings = null,}) {
   return _then(_ConfigClass(
 hotkeys: null == hotkeys ? _self._hotkeys : hotkeys // ignore: cast_nullable_to_non_nullable
-as Map<Events, List<Keys>>,
+as Map<Events, List<Keys>>,componentSettings: null == componentSettings ? _self._componentSettings : componentSettings // ignore: cast_nullable_to_non_nullable
+as List<DraggableComponentSettings>,
   ));
 }
 

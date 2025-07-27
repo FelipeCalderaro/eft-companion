@@ -14,6 +14,7 @@ class TasksCubit extends Cubit<TasksState> {
     loadTasks();
   }
   late TasksList tasksList;
+  int? selectedTask;
   int tryCount = 0;
 
   final TasksRepository _repository = TasksDatasource();
@@ -24,20 +25,15 @@ class TasksCubit extends Cubit<TasksState> {
       tasksList = response;
       emit(_LoadedTasks(tasksList));
     } catch (e, s) {
-      log(
-        "Error while loading Tasks",
-        error: e,
-        stackTrace: s,
-      );
+      log("Error while loading Tasks", error: e, stackTrace: s);
       emit(_Error(e, stackTrace: s));
       if (tryCount < 3) {
         tryCount++;
         await Future.delayed(const Duration(milliseconds: 250));
         return loadTasks();
-      }else {
+      } else {
         emit(const _Error("Failed to load tasks after multiple attempts"));
       }
-
     }
   }
 }

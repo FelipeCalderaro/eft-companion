@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:tarkov_desktop/core/models/task_details/task_details_model.dart';
-import 'package:tarkov_desktop/ui/info/task_info/task_info_page.dart';
 import 'package:tarkov_desktop/ui/theme/app_theme.dart';
 
 class AdditionalInfoSection extends StatelessWidget {
@@ -22,10 +19,7 @@ class AdditionalInfoSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Additional Info",
-            style: AppTextStyle.sectionHeader,
-          ),
+          Text("Additional Info", style: AppTextStyle.sectionHeader),
           Wrap(
             // alignment: WrapAlignment.spaceAround,
             spacing: AppSpacings.defaultSpacing,
@@ -40,30 +34,22 @@ class AdditionalInfoSection extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      ZoomImageOnHover(
-                        width: 350,
-                        height: 200,
-                        url: e.url,
-                        fit: BoxFit.fitWidth,
-                        heroRandomNumber: Random().nextInt(10),
-                      ),
+                      // ZoomImageOnHover(
+                      //   width: 350,
+                      //   height: 200,
+                      //   url: e.url,
+                      //   fit: BoxFit.fitWidth,
+                      //   heroRandomNumber: Random().nextInt(10),
+                      // ),
                       if (e.description.trim().isNotEmpty)
-                        Text(
-                          e.description.trim(),
-                          style: AppTextStyle.regular,
-                        ),
+                        Text(e.description.trim(), style: AppTextStyle.regular),
                     ],
                   ),
                 ),
               ),
             ],
           ),
-          ...texts.map(
-            (e) => Text(
-              e,
-              style: AppTextStyle.regular,
-            ),
-          ),
+          ...texts.map((e) => Text(e, style: AppTextStyle.regular)),
         ],
       ),
     );

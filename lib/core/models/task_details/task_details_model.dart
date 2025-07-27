@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'task_details_model.freezed.dart';
 
 @freezed
-abstract class TaskDetails with _$TaskDetails{
+abstract class TaskDetails with _$TaskDetails {
   const factory TaskDetails({
     String? dialogue,
     required List<TaskDetailImage> detailImages,

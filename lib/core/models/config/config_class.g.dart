@@ -13,6 +13,11 @@ _ConfigClass _$ConfigClassFromJson(Map<String, dynamic> json) => _ConfigClass(
       (e as List<dynamic>).map((e) => $enumDecode(_$KeysEnumMap, e)).toList(),
     ),
   ),
+  componentSettings: (json['components'] as List<dynamic>)
+      .map(
+        (e) => DraggableComponentSettings.fromJson(e as Map<String, dynamic>),
+      )
+      .toList(),
 );
 
 Map<String, dynamic> _$ConfigClassToJson(
@@ -22,6 +27,7 @@ Map<String, dynamic> _$ConfigClassToJson(
     (k, e) =>
         MapEntry(_$EventsEnumMap[k]!, e.map((e) => _$KeysEnumMap[e]!).toList()),
   ),
+  'components': instance.componentSettings,
 };
 
 const _$KeysEnumMap = {

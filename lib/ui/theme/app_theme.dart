@@ -2,24 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 ThemeData appThemeDark = ThemeData(
-  scaffoldBackgroundColor: AppColors.background,
-  textTheme: TextTheme(
-    titleLarge: AppTextStyle.title,
-  ),
-  iconTheme: const IconThemeData(
-    color: AppColors.white,
-  ),
+  scaffoldBackgroundColor: Colors.transparent,
+  textTheme: TextTheme(titleLarge: AppTextStyle.title),
+  iconTheme: const IconThemeData(color: AppColors.white),
   iconButtonTheme: IconButtonThemeData(
-    style: IconButton.styleFrom(
-      foregroundColor: AppColors.white,
-    ),
+    style: IconButton.styleFrom(foregroundColor: AppColors.white),
   ),
   appBarTheme: const AppBarTheme(
     elevation: 0.0,
     color: AppColors.background,
-    iconTheme: IconThemeData(
-      color: AppColors.brushedGold,
-    ),
+    iconTheme: IconThemeData(color: AppColors.brushedGold),
   ),
 );
 
@@ -43,9 +35,7 @@ class AppTextStyle {
   /// Variant from the regular with smaller size.
   ///
   /// `15px` in size
-  static TextStyle regularSmall = regular.copyWith(
-    fontSize: 15,
-  );
+  static TextStyle regularSmall = regular.copyWith(fontSize: 15);
 
   /// Variant from the regular with smaller size.
   ///
@@ -76,9 +66,7 @@ class AppTextStyle {
   /// Variant from the title with larger size.
   ///
   /// `40px` in size
-  static TextStyle titleLarge = title.copyWith(
-    fontSize: 40,
-  );
+  static TextStyle titleLarge = title.copyWith(fontSize: 40);
 
   /// A variant of the regular style with `Bold` font weight
   /// and `18px` in size

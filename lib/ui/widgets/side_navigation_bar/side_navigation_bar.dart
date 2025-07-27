@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:tarkov_desktop/core/utils/get_page_route.dart';
-import 'package:tarkov_desktop/ui/backend_info/backend_info_page.dart';
-import 'package:tarkov_desktop/ui/side_bar/tasks_list/tasks_list_page.dart';
 import 'package:tarkov_desktop/ui/theme/app_theme.dart';
 
 class SideNavigationBar extends StatelessWidget {
@@ -28,11 +25,11 @@ class SideNavigationBar extends StatelessWidget {
         style: AppTextStyle.regular,
         child: isExpanded
             ? const _ExpandedState().animate().slideX(
-                  begin: -.8,
-                  end: 0,
-                  duration: animationsDuration,
-                  curve: Curves.easeIn,
-                )
+                begin: -.8,
+                end: 0,
+                duration: animationsDuration,
+                curve: Curves.easeIn,
+              )
             : const _ClosedState(),
       ),
     );
@@ -47,14 +44,10 @@ class _ClosedState extends StatelessWidget {
     return Column(
       children: const [
         SizedBox(height: 140),
-        Divider(
-          color: AppColors.brushedGold,
-          height: 16,
-          thickness: 5.0,
-        ),
+        Divider(color: AppColors.brushedGold, height: 16, thickness: 5.0),
         Icon(Icons.search),
         Icon(Icons.filter_frames_rounded),
-        Icon(Icons.connected_tv)
+        Icon(Icons.settings),
       ],
     );
   }
@@ -70,51 +63,43 @@ class _ExpandedState extends StatelessWidget {
         SizedBox(
           height: 120,
           width: double.infinity,
-          child: Image.asset(
-            'assets/logos/eft-logo.png',
-            fit: BoxFit.fitWidth,
-          ),
+          child: Image.asset('assets/logos/eft-logo.png', fit: BoxFit.fitWidth),
         ),
         Container(
           alignment: Alignment.bottomCenter,
           child: Text(
             "Companion",
-            style: AppTextStyle.regular.copyWith(
-              color: AppColors.white,
-            ),
+            style: AppTextStyle.regular.copyWith(color: AppColors.white),
           ),
         ),
-        const Divider(
-          color: AppColors.brushedGold,
-          height: 16,
-          thickness: 5.0,
-        ),
+        const Divider(color: AppColors.brushedGold, height: 16, thickness: 5.0),
         TextButton.icon(
           onPressed: () {},
           icon: const Icon(Icons.search),
-          label: const Text(
-            "Browse",
-          ),
+          label: const Text("Browse"),
         ),
+        // TextButton.icon(
+        //   onPressed: () => showSearch(
+        //     context: context,
+        //     delegate: TasksListPage(),
+        //     useRootNavigator: true,
+        //   ),
+        //   icon: const Icon(Icons.filter_frames_rounded),
+        //   label: const Text("Tasks"),
+        // ),
+
+        // TextButton.icon(
+        //   onPressed: () => Navigator.of(context).push(getPageRoute(BackEndInfoPage())),
+        //   icon: const Icon(Icons.connected_tv),
+        //   label: const Text(
+        //     "Backend status",
+        //   ),
+        // ),
         TextButton.icon(
-          onPressed: () => showSearch(
-            context: context,
-            delegate: TasksListPage(),
-            useRootNavigator: true,
-          ),
-          icon: const Icon(Icons.filter_frames_rounded),
-          label: const Text(
-            "Tasks",
-          ),
+          onPressed: () {},
+          icon: const Icon(Icons.settings),
+          label: const Text("Settings"),
         ),
-        TextButton.icon(
-          onPressed: () => Navigator.of(context).push(getPageRoute(BackEndInfoPage())),
-          icon: const Icon(Icons.connected_tv),
-          label: const Text(
-            "Backend status",
-          ),
-        ),
-        
       ],
     );
   }

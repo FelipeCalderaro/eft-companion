@@ -399,13 +399,14 @@ extension AppStatePatterns on AppState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Reload value)?  reload,TResult Function( _StartingBackend value)?  startingBackend,TResult Function( _HttpError value)?  httpError,TResult Function( _Error value)?  error,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Reload value)?  reload,TResult Function( _StartingBackend value)?  startingBackend,TResult Function( _Ready value)?  ready,TResult Function( _HttpError value)?  httpError,TResult Function( _Error value)?  error,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case _Reload() when reload != null:
 return reload(_that);case _StartingBackend() when startingBackend != null:
-return startingBackend(_that);case _HttpError() when httpError != null:
+return startingBackend(_that);case _Ready() when ready != null:
+return ready(_that);case _HttpError() when httpError != null:
 return httpError(_that);case _Error() when error != null:
 return error(_that);case _:
   return orElse();
@@ -425,13 +426,14 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Reload value)  reload,required TResult Function( _StartingBackend value)  startingBackend,required TResult Function( _HttpError value)  httpError,required TResult Function( _Error value)  error,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Reload value)  reload,required TResult Function( _StartingBackend value)  startingBackend,required TResult Function( _Ready value)  ready,required TResult Function( _HttpError value)  httpError,required TResult Function( _Error value)  error,}){
 final _that = this;
 switch (_that) {
 case _Initial():
 return initial(_that);case _Reload():
 return reload(_that);case _StartingBackend():
-return startingBackend(_that);case _HttpError():
+return startingBackend(_that);case _Ready():
+return ready(_that);case _HttpError():
 return httpError(_that);case _Error():
 return error(_that);case _:
   throw StateError('Unexpected subclass');
@@ -450,13 +452,14 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Reload value)?  reload,TResult? Function( _StartingBackend value)?  startingBackend,TResult? Function( _HttpError value)?  httpError,TResult? Function( _Error value)?  error,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Reload value)?  reload,TResult? Function( _StartingBackend value)?  startingBackend,TResult? Function( _Ready value)?  ready,TResult? Function( _HttpError value)?  httpError,TResult? Function( _Error value)?  error,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case _Reload() when reload != null:
 return reload(_that);case _StartingBackend() when startingBackend != null:
-return startingBackend(_that);case _HttpError() when httpError != null:
+return startingBackend(_that);case _Ready() when ready != null:
+return ready(_that);case _HttpError() when httpError != null:
 return httpError(_that);case _Error() when error != null:
 return error(_that);case _:
   return null;
@@ -475,12 +478,13 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  reload,TResult Function()?  startingBackend,TResult Function( Object e,  String? message,  StackTrace? stackTrace)?  httpError,TResult Function( Object error,  StackTrace stackTrace)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  reload,TResult Function()?  startingBackend,TResult Function()?  ready,TResult Function( Object e,  String? message,  StackTrace? stackTrace)?  httpError,TResult Function( Object error,  StackTrace stackTrace)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Reload() when reload != null:
 return reload();case _StartingBackend() when startingBackend != null:
-return startingBackend();case _HttpError() when httpError != null:
+return startingBackend();case _Ready() when ready != null:
+return ready();case _HttpError() when httpError != null:
 return httpError(_that.e,_that.message,_that.stackTrace);case _Error() when error != null:
 return error(_that.error,_that.stackTrace);case _:
   return orElse();
@@ -500,12 +504,13 @@ return error(_that.error,_that.stackTrace);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  reload,required TResult Function()  startingBackend,required TResult Function( Object e,  String? message,  StackTrace? stackTrace)  httpError,required TResult Function( Object error,  StackTrace stackTrace)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  reload,required TResult Function()  startingBackend,required TResult Function()  ready,required TResult Function( Object e,  String? message,  StackTrace? stackTrace)  httpError,required TResult Function( Object error,  StackTrace stackTrace)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Reload():
 return reload();case _StartingBackend():
-return startingBackend();case _HttpError():
+return startingBackend();case _Ready():
+return ready();case _HttpError():
 return httpError(_that.e,_that.message,_that.stackTrace);case _Error():
 return error(_that.error,_that.stackTrace);case _:
   throw StateError('Unexpected subclass');
@@ -524,12 +529,13 @@ return error(_that.error,_that.stackTrace);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  reload,TResult? Function()?  startingBackend,TResult? Function( Object e,  String? message,  StackTrace? stackTrace)?  httpError,TResult? Function( Object error,  StackTrace stackTrace)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  reload,TResult? Function()?  startingBackend,TResult? Function()?  ready,TResult? Function( Object e,  String? message,  StackTrace? stackTrace)?  httpError,TResult? Function( Object error,  StackTrace stackTrace)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Reload() when reload != null:
 return reload();case _StartingBackend() when startingBackend != null:
-return startingBackend();case _HttpError() when httpError != null:
+return startingBackend();case _Ready() when ready != null:
+return ready();case _HttpError() when httpError != null:
 return httpError(_that.e,_that.message,_that.stackTrace);case _Error() when error != null:
 return error(_that.error,_that.stackTrace);case _:
   return null;
@@ -627,6 +633,38 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'AppState.startingBackend()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _Ready implements AppState {
+  const _Ready();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Ready);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'AppState.ready()';
 }
 
 

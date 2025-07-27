@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:tarkov_desktop/ui/home/home_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tarkov_desktop/core/blocs/app_bloc/app_bloc.dart';
+import 'package:tarkov_desktop/ui/board/board_test.dart';
+import 'package:tarkov_desktop/ui/loading_page/loading_page.dart';
 import 'package:tarkov_desktop/ui/theme/app_theme.dart';
-import 'package:tarkov_desktop/ui/widgets/side_navigation_bar/side_navigation_bar.dart';
 
 class BasePage extends StatefulWidget {
   const BasePage({super.key});
@@ -19,42 +20,50 @@ class _BasePageState extends State<BasePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: AppColors.white,
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: Row(
-          children: [
-            MouseRegion(
-              onEnter: (event) {
-                // if the default is closed
-                if (!sideNavigationDefaultState) {
-                  // then, open
-                  setState(() => sideNavigationExpanded = true);
-                }
-              },
-              // returns to the default state
-              onExit: (event) => setState(
-                () => sideNavigationExpanded = sideNavigationDefaultState,
-              ),
-              child: SideNavigationBar(
-                animationsDuration: 100.ms,
-                width: sideNavigationExpanded
-                    ? sideNavigationExpandedWidth
-                    : sideNavigationClosedWidth,
-                isExpanded: sideNavigationExpanded,
-              ),
-            ),
-            Expanded(
-              // child: Navigator(
-              //   restorationScopeId: "nv1.navigator.restoration.scope",
-              //   initialRoute: "/",
-              //   onGenerateRoute: onGenerateRoute,
-              // ),
-              child: MultiTabPage(page: HomePage()),
-            ),
-          ],
+    return BlocConsumer<AppBloc, AppState>(
+      listener: (context, state) {},
+      builder: (context, state) => state.maybeWhen(
+        orElse: () => LoadingPage(),
+        ready: () => Scaffold(
+          body: DrawingBoardPage(),
+          floatingActionButton: FloatingActionButton(onPressed: () {}),
+          // body: Container(
+          //   color: AppColors.white,
+          //   height: MediaQuery.of(context).size.height,
+          //   width: MediaQuery.of(context).size.width,
+          //   child: Row(
+          //     children: [
+          //       MouseRegion(
+          //         onEnter: (event) {
+          //           // if the default is closed
+          //           if (!sideNavigationDefaultState) {
+          //             // then, open
+          //             setState(() => sideNavigationExpanded = true);
+          //           }
+          //         },
+          //         // returns to the default state
+          //         onExit: (event) => setState(
+          //           () => sideNavigationExpanded = sideNavigationDefaultState,
+          //         ),
+          //         child: SideNavigationBar(
+          //           animationsDuration: 100.ms,
+          //           width: sideNavigationExpanded
+          //               ? sideNavigationExpandedWidth
+          //               : sideNavigationClosedWidth,
+          //           isExpanded: sideNavigationExpanded,
+          //         ),
+          //       ),
+          //       Expanded(
+          //         // child: Navigator(
+          //         //   restorationScopeId: "nv1.navigator.restoration.scope",
+          //         //   initialRoute: "/",
+          //         //   onGenerateRoute: onGenerateRoute,
+          //         // ),
+          //         child: MultiTabPage(page: HomePage()),
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ),
       ),
     );
@@ -77,7 +86,7 @@ class MultiTabPageState extends State<MultiTabPage> {
         maintainState: true,
         child: widget.page,
         name: widget.page.runtimeType.toString(),
-      )
+      ),
     ],
   );
   int currentIndex = 0;
@@ -119,8 +128,9 @@ class MultiTabPageState extends State<MultiTabPage> {
                     setState(() {});
                   },
                   child: Container(
-                    decoration:
-                        const BoxDecoration(color: AppColors.eerieBlack),
+                    decoration: const BoxDecoration(
+                      color: AppColors.eerieBlack,
+                    ),
                     child: const Icon(
                       Icons.add_box_rounded,
                       color: AppColors.brushedGold,
@@ -133,11 +143,8 @@ class MultiTabPageState extends State<MultiTabPage> {
           ],
         ),
         Expanded(
-          child: IndexedStack(
-            index: currentIndex,
-            children: pages,
-          ),
-        )
+          child: IndexedStack(index: currentIndex, children: pages),
+        ),
       ],
     );
   }
