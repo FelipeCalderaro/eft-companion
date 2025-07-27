@@ -26,7 +26,6 @@ class _BasePageState extends State<BasePage> {
         orElse: () => LoadingPage(),
         ready: () => Scaffold(
           body: DrawingBoardPage(),
-          floatingActionButton: FloatingActionButton(onPressed: () {}),
           // body: Container(
           //   color: AppColors.white,
           //   height: MediaQuery.of(context).size.height,

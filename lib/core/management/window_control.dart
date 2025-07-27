@@ -18,12 +18,11 @@ class WindowControl {
   bool isOverlayMode = false;
   int screenHeight = 0;
   int screenWidth = 0;
-  final Size initialWindowsSize = const Size(1215.6, 800);
 
   Future<void> startUp() async {
     SetProcessDpiAwareness(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
-    screenHeight = GetSystemMetrics(SM_CXVIRTUALSCREEN);
-    screenWidth = GetSystemMetrics(SM_CYVIRTUALSCREEN);
+    screenHeight = GetSystemMetrics(SM_CYSCREEN);
+    screenWidth = GetSystemMetrics(SM_CXSCREEN);
     await mng.ensureInitialized();
     // await mng.setBackgroundColor(AppColors.background);
 

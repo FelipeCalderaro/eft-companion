@@ -19,6 +19,7 @@ class DrawingBoardPage extends StatefulWidget {
 class DrawingBoardPageState extends State<DrawingBoardPage> {
   // Each component has a unique ID, position, and color
   final ConfigService config = serviceRegister<ConfigService>();
+  final AppBloc appBloc = serviceRegister<AppBloc>();
   late final List<DraggableComponentSettings> components = config
       .currentConfig
       .componentSettings
@@ -61,6 +62,7 @@ class DrawingBoardPageState extends State<DrawingBoardPage> {
                   config.currentConfig = config.currentConfig.copyWith(
                     componentSettings: components,
                   );
+                  config.saveConfig();
                   setState(() {});
                 },
                 child: Visibility(
@@ -68,9 +70,9 @@ class DrawingBoardPageState extends State<DrawingBoardPage> {
                   maintainAnimation: true,
                   maintainState: true,
                   visible:
-                      settings.isPinnedToScreen ||
-                      serviceRegister<AppBloc>().isPassthroughEnabled,
+                      settings.isPinnedToScreen || appBloc.isPassthroughEnabled,
                   child: DragContainer(
+                    displayBorder: appBloc.isPassthroughEnabled,
                     settings: settings,
                     child: switch (settings.id) {
                       Components.taskList => TaskList(),
@@ -82,18 +84,6 @@ class DrawingBoardPageState extends State<DrawingBoardPage> {
               ),
             );
           }),
-          Positioned.fill(
-            child: IgnorePointer(
-              child: Container(
-                color: const Color.fromARGB(
-                  6,
-                  0,
-                  0,
-                  0,
-                ), // ensures window is drawn
-              ),
-            ),
-          ),
         ],
       ),
     );
@@ -120,7 +110,7 @@ class DraggableWidget extends StatefulWidget {
 
 class DraggableWidgetState extends State<DraggableWidget> {
   Offset _dragOffset = Offset.zero;
-  bool displayDragConfig = false;
+  late double opacity = widget.settings.opacity;
 
   @override
   Widget build(BuildContext context) {
@@ -182,11 +172,24 @@ class DraggableWidgetState extends State<DraggableWidget> {
                           ? Icon(Icons.push_pin, color: Colors.blue, size: 15)
                           : Icon(Icons.push_pin_outlined, size: 15.0),
                     ),
+                    Slider(
+                      label: "Opacity",
+                      activeColor: AppColors.polishedGold,
+                      value: opacity,
+                      onChanged: (v) => setState(() => opacity = v),
+                      onChangeEnd: (value) {
+                        if (widget.onSettingsUpdate != null) {
+                          widget.onSettingsUpdate!(
+                            widget.settings.copyWith(opacity: value),
+                          );
+                        }
+                      },
+                    ),
                   ],
                 ),
               ),
             ),
-            widget.child,
+            Opacity(opacity: opacity, child: widget.child),
           ],
         ),
       ),
@@ -197,7 +200,13 @@ class DraggableWidgetState extends State<DraggableWidget> {
 class DragContainer extends StatefulWidget {
   final Widget child;
   final DraggableComponentSettings settings;
-  const DragContainer({super.key, required this.child, required this.settings});
+  final bool displayBorder;
+  const DragContainer({
+    super.key,
+    required this.child,
+    required this.settings,
+    required this.displayBorder,
+  });
 
   @override
   State<DragContainer> createState() => _DragContainerState();
@@ -208,14 +217,16 @@ class _DragContainerState extends State<DragContainer> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(6.0),
-      decoration: BoxDecoration(
-        border: BoxBorder.all(
-          color: Colors.grey,
-          style: BorderStyle.solid,
-          width: 1.5,
-        ),
-        borderRadius: BorderRadius.circular(5.0),
-      ),
+      decoration: widget.displayBorder
+          ? BoxDecoration(
+              border: BoxBorder.all(
+                color: Colors.grey,
+                style: BorderStyle.solid,
+                width: 1.5,
+              ),
+              borderRadius: BorderRadius.circular(5.0),
+            )
+          : null,
       child: widget.child,
     );
   }

@@ -24,59 +24,56 @@ class SelectedTaskComponent extends StatelessWidget {
             ),
           ),
         ),
-        loaded: (info, details) {
-          print(details);
-          return Container(
-            child: Column(
-              children: [
-                Text(
-                  info.task.name,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 19,
+        loaded: (info, details) => Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            color: Colors.black26,
+          ),
+          child: Column(
+            children: [
+              Text(
+                info.task.name,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 19,
+                ),
+              ),
+              Row(
+                children: [
+                  Container(
+                    height: 60,
+                    width: 60,
+                    margin: EdgeInsets.only(right: AppSpacings.small),
+                    child: Image.network(info.task.trader.imageLink),
                   ),
-                ),
-                Row(
-                  children: [
-                    Container(
-                      height: 60,
-                      width: 60,
-                      margin: EdgeInsets.only(right: AppSpacings.small),
-                      child: Image.network(info.task.trader.imageLink),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        RichText(
-                          text: TextSpan(
-                            text: "Map: ",
-                            children: [TextSpan(text: info.task.map?.name)],
-                          ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      RichText(
+                        text: TextSpan(
+                          text: "Map: ",
+                          children: [TextSpan(text: info.task.map?.name)],
                         ),
-                        RichText(
-                          text: TextSpan(
-                            text: "Objectives: \n",
-                            children: [
-                              ...info.task.objectives.map(
-                                (obj) =>
-                                    TextSpan(text: "\t- ${obj.description}\n"),
-                              ),
-                            ],
-                          ),
+                      ),
+                      RichText(
+                        text: TextSpan(
+                          text: "Objectives: \n",
+                          children: [
+                            ...info.task.objectives.map(
+                              (obj) =>
+                                  TextSpan(text: "\t- ${obj.description}\n"),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-                // InteractiveImage(
-                //   imageUrls: details.detailImages.map((i) => i.url).toList(),
-                //   size: Size(400, 400),
-                // ),
-              ],
-            ),
-          );
-        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

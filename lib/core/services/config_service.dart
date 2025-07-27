@@ -18,7 +18,7 @@ class ConfigService {
 
   ConfigClass get defaultConfig => ConfigClass(
     hotkeys: {
-      Events.toggleVisibility: [Keys.ControlLeft, Keys.CapsLock],
+      Events.toggleVisibility: [Keys.Alt, Keys.CapsLock],
     },
     componentSettings: [
       DraggableComponentSettings(
