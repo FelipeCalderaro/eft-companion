@@ -11,4 +11,5 @@ class Constants {
       12548; // Default port for the backend WebSocket server
   static const bool isProduction = true; // Set to true for production builds
   static const double mouseWheelScaleFactor = 1000;
+  static const double toolbarHeight = 65.0;
 }

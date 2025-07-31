@@ -5,7 +5,13 @@ import 'package:tarkov_desktop/ui/info/task_info/cubit/task_info_cubit.dart';
 import 'package:tarkov_desktop/ui/theme/app_theme.dart';
 
 class SelectedTaskComponent extends StatelessWidget {
-  const SelectedTaskComponent({super.key});
+  final double width;
+  final double height;
+  const SelectedTaskComponent({
+    super.key,
+    required this.width,
+    required this.height,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +19,8 @@ class SelectedTaskComponent extends StatelessWidget {
       bloc: serviceRegister<TaskInfoCubit>(),
       listener: (context, state) {},
       builder: (context, state) => state.maybeWhen(
-        orElse: () => Container(
+        orElse: () => Container(),
+        loading: () => Container(
           padding: EdgeInsets.symmetric(horizontal: 100, vertical: 55),
           child: SizedBox(
             height: 15,
@@ -25,11 +32,14 @@ class SelectedTaskComponent extends StatelessWidget {
           ),
         ),
         loaded: (info, details) => Container(
+          height: height,
+          width: width,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
             color: Colors.black26,
           ),
           child: Column(
+            mainAxisSize: MainAxisSize.max,
             children: [
               Text(
                 info.task.name,
@@ -47,27 +57,30 @@ class SelectedTaskComponent extends StatelessWidget {
                     margin: EdgeInsets.only(right: AppSpacings.small),
                     child: Image.network(info.task.trader.imageLink),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      RichText(
-                        text: TextSpan(
-                          text: "Map: ",
-                          children: [TextSpan(text: info.task.map?.name)],
-                        ),
-                      ),
-                      RichText(
-                        text: TextSpan(
-                          text: "Objectives: \n",
-                          children: [
-                            ...info.task.objectives.map(
-                              (obj) =>
-                                  TextSpan(text: "\t- ${obj.description}\n"),
+                  SizedBox(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (info.task.map != null)
+                          RichText(
+                            text: TextSpan(
+                              text: "Map: ",
+                              children: [TextSpan(text: info.task.map?.name)],
                             ),
-                          ],
+                          ),
+                        RichText(
+                          text: TextSpan(
+                            text: "Objectives: \n",
+                            children: [
+                              ...info.task.objectives.map(
+                                (obj) =>
+                                    TextSpan(text: "\t- ${obj.description}\n"),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),

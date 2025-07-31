@@ -7,7 +7,9 @@ import 'package:tarkov_desktop/ui/info/task_info/cubit/task_info_cubit.dart';
 import 'package:tarkov_desktop/ui/theme/app_theme.dart';
 
 class TaskList extends StatefulWidget {
-  const TaskList({super.key});
+  final double width;
+  final double height;
+  const TaskList({super.key, required this.width, required this.height});
 
   @override
   State<TaskList> createState() => _TaskListState();
@@ -23,8 +25,8 @@ class _TaskListState extends State<TaskList> {
       bloc: serviceRegister<TasksCubit>(),
       listener: (context, state) {},
       builder: (context, state) => SizedBox(
-        height: 400,
-        width: 650,
+        height: widget.height,
+        width: widget.width,
         child: Column(
           children: [
             Container(
@@ -66,53 +68,52 @@ class _TaskListState extends State<TaskList> {
                 return Expanded(
                   child: ListView.builder(
                     itemCount: tasks.length,
-                    itemBuilder: (context, index) => Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 100,
-                          width: 70,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.network(tasks[index].trader.imageLink),
-                              Text(
-                                tasks[index].trader.name,
-                                style: AppTextStyle.regularSmallest,
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: AppSpacings.defaultSpacing),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
+                    itemBuilder: (context, index) => MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: () => serviceRegister<TaskInfoCubit>()
+                            .fetchTaskInfo(tasks[index].id),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             SizedBox(
-                              width: 450,
-                              child: Text(
-                                tasks[index].name,
-                                overflow: TextOverflow.fade,
-                                style: AppTextStyle.sectionHeader,
+                              height: 110,
+                              width: 70,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.network(tasks[index].trader.imageLink),
+                                  Text(
+                                    tasks[index].trader.name,
+                                    style: AppTextStyle.regularSmallest,
+                                  ),
+                                ],
                               ),
                             ),
-                            if (tasks[index].map != null)
-                              Text(
-                                tasks[index].map!.name,
-                                style: AppTextStyle.regularSmall,
-                              ),
+                            const SizedBox(width: AppSpacings.defaultSpacing),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SizedBox(
+                                  width: widget.width * .5,
+                                  child: Text(
+                                    tasks[index].name,
+                                    overflow: TextOverflow.fade,
+                                    style: AppTextStyle.sectionHeader,
+                                  ),
+                                ),
+                                if (tasks[index].map != null)
+                                  Text(
+                                    tasks[index].map!.name,
+                                    style: AppTextStyle.regularSmall,
+                                  ),
+                              ],
+                            ),
                           ],
                         ),
-                        TextButton.icon(
-                          onPressed: () => serviceRegister<TaskInfoCubit>()
-                              .fetchTaskInfo(tasks[index].id),
-                          label: Icon(
-                            Icons.select_all_outlined,
-                            color: AppColors.brushedGold,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 );

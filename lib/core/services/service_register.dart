@@ -12,5 +12,6 @@ class ServiceRegister {
     serviceRegister.registerSingleton<AppBloc>(AppBloc());
     serviceRegister.registerSingleton<TasksCubit>(TasksCubit());
     serviceRegister.registerSingleton<TaskInfoCubit>(TaskInfoCubit());
+    //
   }
 }

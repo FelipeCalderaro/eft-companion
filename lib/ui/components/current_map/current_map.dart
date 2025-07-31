@@ -6,15 +6,22 @@ import 'package:tarkov_desktop/ui/theme/app_theme.dart';
 import 'package:tarkov_desktop/ui/widgets/interactive_image/interactive_image.dart';
 
 class CurrentMap extends StatelessWidget {
-  const CurrentMap({super.key});
+  final double height;
+  final double width;
+
+  CurrentMap({super.key, required this.height, required this.width});
+
+  final double mapNameHeight = 50;
+  final cubit = serviceRegister<TaskInfoCubit>();
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<TaskInfoCubit, TaskInfoState>(
-      bloc: serviceRegister<TaskInfoCubit>(),
+      bloc: cubit,
       listener: (context, state) {},
       builder: (context, state) => state.maybeWhen(
-        orElse: () => Container(
+        orElse: () => Container(),
+        loading: () => Container(
           padding: EdgeInsets.symmetric(horizontal: 100, vertical: 55),
           child: SizedBox(
             height: 15,
@@ -29,18 +36,21 @@ class CurrentMap extends StatelessWidget {
           children: [
             Container(
               alignment: Alignment.center,
-              height: 50,
+              height: mapNameHeight,
               child: Text(
-                "${info.task.map?.name}",
+                info.task.map?.name ?? 'No map',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
               ),
             ),
-            InteractiveImage(
-              imageUrls: details.detailImages.map((i) => i.url).toList(),
-            ),
+            if (details.detailImages.isNotEmpty)
+              InteractiveImage(
+                controllers: cubit.taskImagesControllers,
+                size: Size(width, height - mapNameHeight - AppSpacings.small),
+                imageUrls: details.detailImages.map((i) => i.url).toList(),
+              ),
           ],
         ),
       ),

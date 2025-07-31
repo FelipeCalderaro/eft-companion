@@ -1,6 +1,4 @@
-// To parse this JSON data, do
-//
-//     final taskInfo = taskInfoFromJson(jsonString);
+// ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -9,293 +7,55 @@ part 'task_info_model.g.dart';
 
 @freezed
 abstract class TaskInfo with _$TaskInfo {
-  const factory TaskInfo({
-    required TaskInfoTask task,
-  }) = _TaskInfo;
+  const factory TaskInfo({@JsonKey(name: "task") required Task task}) =
+      _TaskInfo;
 
   factory TaskInfo.fromJson(Map<String, dynamic> json) =>
       _$TaskInfoFromJson(json);
 }
 
 @freezed
-abstract class TaskInfoTask with _$TaskInfoTask {
-  const factory TaskInfoTask({
-    required String id,
-    required String name,
-    required bool kappaRequired,
-    required Trader trader,
-    required int experience,
-    required String wikiLink,
-    required List<TaskRequirement> taskRequirements,
-    StartRewards? startRewards,
-    FinishRewards? finishRewards,
-    required List<Objective> objectives,
-    required List<dynamic> failConditions,
-    required bool restartable,
-    FailureOutcome? failureOutcome,
-    required List<NeededKey> neededKeys,
-    MapClass? map,
-  }) = _TaskInfoTask;
+abstract class Task with _$Task {
+  const factory Task({
+    @JsonKey(name: "id") required String id,
+    @JsonKey(name: "name") required String name,
+    @JsonKey(name: "kappaRequired") required bool kappaRequired,
+    @JsonKey(name: "wikiLink") required String wikiLink,
+    @JsonKey(name: "experience") required int experience,
+    @JsonKey(name: "restartable") required bool restartable,
+    @JsonKey(name: "failConditions") required List<dynamic> failConditions,
+    @JsonKey(name: "trader") required Trader trader,
+    @JsonKey(name: "map") required TaskMap? map,
+    @JsonKey(name: "objectives") required List<Objective> objectives,
+  }) = _Task;
 
-  factory TaskInfoTask.fromJson(Map<String, dynamic> json) =>
-      _$TaskInfoTaskFromJson(json);
+  factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 }
 
 @freezed
-abstract class NeededKey with _$NeededKey {
-  const factory NeededKey({
-    List<Key>? keys,
-  }) = _NeededKey;
+abstract class TaskMap with _$TaskMap {
+  const factory TaskMap({
+    @JsonKey(name: "id") required String id,
+    @JsonKey(name: "name") required String name,
+    @JsonKey(name: "normalizedName") required String normalizedName,
+  }) = _TaskMap;
 
-  factory NeededKey.fromJson(Map<String, dynamic> json) =>
-      _$NeededKeyFromJson(json);
-}
-
-@freezed
-abstract class Key with _$Key {
-  const factory Key({
-    required String id,
-    required String name,
-    required String description,
-    required int basePrice,
-    required String image8xLink,
-    required String image512pxLink,
-    required String gridImageLink,
-    required String baseImageLink,
-    required List<BartersFor> bartersFor,
-    required String backgroundColor,
-    required List<String> types,
-    required DateTime updated,
-    required int lastLowPrice,
-  }) = _Key;
-
-  factory Key.fromJson(Map<String, dynamic> json) => _$KeyFromJson(json);
-}
-
-@freezed
-abstract class FailureOutcome with _$FailureOutcome {
-  const factory FailureOutcome({
-    required List<dynamic> traderStanding,
-    required List<dynamic> offerUnlock,
-  }) = _FailureOutcome;
-
-  factory FailureOutcome.fromJson(Map<String, dynamic> json) =>
-      _$FailureOutcomeFromJson(json);
-}
-
-@freezed
-abstract class FinishRewards with _$FinishRewards {
-  const factory FinishRewards({
-    required List<FinishRewardsItem> items,
-  }) = _FinishRewards;
-
-  factory FinishRewards.fromJson(Map<String, dynamic> json) =>
-      _$FinishRewardsFromJson(json);
-}
-
-@freezed
-abstract class BartersFor with _$BartersFor {
-  const factory BartersFor({
-    required String id,
-    required BartersForTrader trader,
-  }) = _BartersFor;
-
-  factory BartersFor.fromJson(Map<String, dynamic> json) =>
-      _$BartersForFromJson(json);
-}
-
-@freezed
-abstract class BartersForTrader with _$BartersForTrader {
-  const factory BartersForTrader({
-    required String id,
-    required String name,
-    required String imageLink,
-    required String image4xLink,
-  }) = _BartersForTrader;
-
-  factory BartersForTrader.fromJson(Map<String, dynamic> json) =>
-      _$BartersForTraderFromJson(json);
-}
-
-@freezed
-abstract class FinishRewardsItem with _$FinishRewardsItem {
-  const factory FinishRewardsItem({
-    required ItemItem item,
-    required int quantity,
-  }) = _FinishRewardsItem;
-
-  factory FinishRewardsItem.fromJson(Map<String, dynamic> json) =>
-      _$FinishRewardsItemFromJson(json);
-}
-
-@freezed
-abstract class ItemItem with _$ItemItem {
-  const factory ItemItem({
-    required String id,
-    required String name,
-    required String image8xLink,
-    required String image512pxLink,
-  }) = _ItemItem;
-
-  factory ItemItem.fromJson(Map<String, dynamic> json) =>
-      _$ItemItemFromJson(json);
-}
-
-@freezed
-abstract class MapClass with _$MapClass {
-  const factory MapClass({
-    required String id,
-    required String name,
-    required String description,
-    required String wiki,
-    required List<String> enemies,
-    required int raidDuration,
-    required String players,
-    required List<BossElement> bosses,
-  }) = _MapClass;
-
-  factory MapClass.fromJson(Map<String, dynamic> json) =>
-      _$MapClassFromJson(json);
-}
-
-@freezed
-abstract class BossElement with _$BossElement {
-  const factory BossElement({
-    required int spawnTime,
-    required double spawnChance,
-    required dynamic spawnTrigger,
-    required List<SpawnLocation> spawnLocations,
-    required List<Escort> escorts,
-    required bool spawnTimeRandom,
-    required BossBoss boss,
-  }) = _BossElement;
-
-  factory BossElement.fromJson(Map<String, dynamic> json) =>
-      _$BossElementFromJson(json);
-}
-
-@freezed
-abstract class BossBoss with _$BossBoss {
-  const factory BossBoss({
-    required String id,
-    required String name,
-    required List<Health> health,
-    required String imagePosterLink,
-    required List<Equipment> equipment,
-    required List<ContainsItemItem> items,
-  }) = _BossBoss;
-
-  factory BossBoss.fromJson(Map<String, dynamic> json) =>
-      _$BossBossFromJson(json);
-}
-
-@freezed
-abstract class Equipment with _$Equipment {
-  const factory Equipment({
-    required EquipmentItem item,
-    required List<Attribute> attributes,
-  }) = _Equipment;
-
-  factory Equipment.fromJson(Map<String, dynamic> json) =>
-      _$EquipmentFromJson(json);
-}
-
-@freezed
-abstract class Attribute with _$Attribute {
-  const factory Attribute({
-    required String name,
-    required String value,
-  }) = _Attribute;
-
-  factory Attribute.fromJson(Map<String, dynamic> json) =>
-      _$AttributeFromJson(json);
-}
-
-@freezed
-abstract class EquipmentItem with _$EquipmentItem {
-  const factory EquipmentItem({
-    required String id,
-    required List<ContainsItem> containsItems,
-  }) = _EquipmentItem;
-
-  factory EquipmentItem.fromJson(Map<String, dynamic> json) =>
-      _$EquipmentItemFromJson(json);
-}
-
-@freezed
-abstract class ContainsItem with _$ContainsItem {
-  const factory ContainsItem({
-    required ContainsItemItem item,
-  }) = _ContainsItem;
-
-  factory ContainsItem.fromJson(Map<String, dynamic> json) =>
-      _$ContainsItemFromJson(json);
-}
-
-@freezed
-abstract class ContainsItemItem with _$ContainsItemItem {
-  const factory ContainsItemItem({
-    required String id,
-  }) = _ContainsItemItem;
-
-  factory ContainsItemItem.fromJson(Map<String, dynamic> json) =>
-      _$ContainsItemItemFromJson(json);
-}
-
-@freezed
-abstract class Health with _$Health {
-  const factory Health({
-    required String id,
-    required int max,
-    required String bodyPart,
-  }) = _Health;
-
-  factory Health.fromJson(Map<String, dynamic> json) => _$HealthFromJson(json);
-}
-
-@freezed
-abstract class Escort with _$Escort {
-  const factory Escort({
-    required EscortBoss boss,
-  }) = _Escort;
-
-  factory Escort.fromJson(Map<String, dynamic> json) => _$EscortFromJson(json);
-}
-
-@freezed
-abstract class EscortBoss with _$EscortBoss {
-  const factory EscortBoss({
-    required String id,
-    required String name,
-    required List<Health> health,
-    required String imagePosterLink,
-    required List<Equipment> equipment,
-    required List<ContainsItemItem> items,
-  }) = _EscortBoss;
-
-  factory EscortBoss.fromJson(Map<String, dynamic> json) =>
-      _$EscortBossFromJson(json);
-}
-
-@freezed
-abstract class SpawnLocation with _$SpawnLocation {
-  const factory SpawnLocation({
-    required String name,
-    required double chance,
-  }) = _SpawnLocation;
-
-  factory SpawnLocation.fromJson(Map<String, dynamic> json) =>
-      _$SpawnLocationFromJson(json);
+  factory TaskMap.fromJson(Map<String, dynamic> json) =>
+      _$TaskMapFromJson(json);
 }
 
 @freezed
 abstract class Objective with _$Objective {
   const factory Objective({
-    required String id,
-    required bool optional,
-    required List<TaskElement> maps,
-    required String description,
-    required String type,
+    @JsonKey(name: "id") required String id,
+    @JsonKey(name: "optional") required bool optional,
+    @JsonKey(name: "description") required String description,
+    @JsonKey(name: "type") required String type,
+    @JsonKey(name: "count") int? count,
+    @JsonKey(name: "questItem") required QuestItem? questItem,
+    @JsonKey(name: "maps") required List<MapElement> maps,
+    @JsonKey(name: "requiredKeys")
+    required List<List<RequiredKey>?>? requiredKeys,
   }) = _Objective;
 
   factory Objective.fromJson(Map<String, dynamic> json) =>
@@ -303,58 +63,55 @@ abstract class Objective with _$Objective {
 }
 
 @freezed
-abstract class TaskElement with _$TaskElement {
-  const factory TaskElement({
-    required String id,
-    required String name,
-  }) = _TaskElement;
+abstract class MapElement with _$MapElement {
+  const factory MapElement({
+    @JsonKey(name: "id") required String id,
+    @JsonKey(name: "name") required String name,
+  }) = _MapElement;
 
-  factory TaskElement.fromJson(Map<String, dynamic> json) =>
-      _$TaskElementFromJson(json);
+  factory MapElement.fromJson(Map<String, dynamic> json) =>
+      _$MapElementFromJson(json);
 }
 
 @freezed
-abstract class StartRewards with _$StartRewards {
-  const factory StartRewards({
-    required List<dynamic> items,
-  }) = _StartRewards;
+abstract class QuestItem with _$QuestItem {
+  const factory QuestItem({
+    @JsonKey(name: "id") required String id,
+    @JsonKey(name: "name") required String name,
+    @JsonKey(name: "normalizedName") required String normalizedName,
+    @JsonKey(name: "image512pxLink") required String image512PxLink,
+    @JsonKey(name: "gridImageLink") required String gridImageLink,
+    @JsonKey(name: "description") required String description,
+  }) = _QuestItem;
 
-  factory StartRewards.fromJson(Map<String, dynamic> json) =>
-      _$StartRewardsFromJson(json);
+  factory QuestItem.fromJson(Map<String, dynamic> json) =>
+      _$QuestItemFromJson(json);
 }
 
 @freezed
-abstract class TaskRequirement with _$TaskRequirement {
-  const factory TaskRequirement({
-    required TaskElement task,
-    required List<String> status,
-  }) = _TaskRequirement;
+abstract class RequiredKey with _$RequiredKey {
+  const factory RequiredKey({
+    @JsonKey(name: "id") required String id,
+    @JsonKey(name: "name") required String name,
+    @JsonKey(name: "image8xLink") required String image8XLink,
+    @JsonKey(name: "gridImageLink") required String gridImageLink,
+    @JsonKey(name: "description") required String description,
+    @JsonKey(name: "basePrice") required int basePrice,
+    @JsonKey(name: "lastLowPrice") required int lastLowPrice,
+  }) = _RequiredKey;
 
-  factory TaskRequirement.fromJson(Map<String, dynamic> json) =>
-      _$TaskRequirementFromJson(json);
+  factory RequiredKey.fromJson(Map<String, dynamic> json) =>
+      _$RequiredKeyFromJson(json);
 }
 
 @freezed
 abstract class Trader with _$Trader {
   const factory Trader({
-    required String id,
-    required String name,
-    required String imageLink,
-    required String image4xLink,
-    required List<Level> levels,
+    @JsonKey(name: "id") required String id,
+    @JsonKey(name: "name") required String name,
+    @JsonKey(name: "imageLink") required String imageLink,
+    @JsonKey(name: "image4xLink") required String image4XLink,
   }) = _Trader;
 
   factory Trader.fromJson(Map<String, dynamic> json) => _$TraderFromJson(json);
-}
-
-@freezed
-abstract class Level with _$Level {
-  const factory Level({
-    required String id,
-    required int requiredCommerce,
-    required double requiredReputation,
-    required int requiredPlayerLevel,
-  }) = _Level;
-
-  factory Level.fromJson(Map<String, dynamic> json) => _$LevelFromJson(json);
 }

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tarkov_desktop/core/models/task_details/task_details_model.dart';
 import 'package:tarkov_desktop/core/services/wiki_scraper.dart';
@@ -17,14 +18,19 @@ class TaskInfoCubit extends Cubit<TaskInfoState> {
   final TaskRepository _repository = TaskDatasource();
   final WikiScraperService _service = WikiScraperService();
 
+  List<TransformationController> taskImagesControllers = [];
+
   Future<void> fetchTaskInfo(String id) async {
     emit(const _Loading());
     try {
+      taskImagesControllers.clear();
       final response = await _repository.fetchTask(id);
       final detailsResponse = await _service.scrapeGuideSection(
         response.task.wikiLink,
       );
-
+      taskImagesControllers = detailsResponse.detailImages
+          .map((e) => TransformationController())
+          .toList();
       emit(_Loaded(response, detailsResponse));
     } catch (e, s) {
       log("Error while loading Task", error: e, stackTrace: s);

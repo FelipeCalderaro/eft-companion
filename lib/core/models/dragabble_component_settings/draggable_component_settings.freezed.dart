@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DraggableComponentSettings {
 
- Components get id; double get positionDx; double get positionDy; double? get width; double? get height; bool get isPinnedToScreen; double get opacity;
+ Components get id; double get positionDx; double get positionDy; bool get isPinnedToScreen; double get width; double get height; double get opacity;
 /// Create a copy of DraggableComponentSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $DraggableComponentSettingsCopyWith<DraggableComponentSettings> get copyWith => 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DraggableComponentSettings&&(identical(other.id, id) || other.id == id)&&(identical(other.positionDx, positionDx) || other.positionDx == positionDx)&&(identical(other.positionDy, positionDy) || other.positionDy == positionDy)&&(identical(other.width, width) || other.width == width)&&(identical(other.height, height) || other.height == height)&&(identical(other.isPinnedToScreen, isPinnedToScreen) || other.isPinnedToScreen == isPinnedToScreen)&&(identical(other.opacity, opacity) || other.opacity == opacity));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DraggableComponentSettings&&(identical(other.id, id) || other.id == id)&&(identical(other.positionDx, positionDx) || other.positionDx == positionDx)&&(identical(other.positionDy, positionDy) || other.positionDy == positionDy)&&(identical(other.isPinnedToScreen, isPinnedToScreen) || other.isPinnedToScreen == isPinnedToScreen)&&(identical(other.width, width) || other.width == width)&&(identical(other.height, height) || other.height == height)&&(identical(other.opacity, opacity) || other.opacity == opacity));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,positionDx,positionDy,width,height,isPinnedToScreen,opacity);
+int get hashCode => Object.hash(runtimeType,id,positionDx,positionDy,isPinnedToScreen,width,height,opacity);
 
 @override
 String toString() {
-  return 'DraggableComponentSettings(id: $id, positionDx: $positionDx, positionDy: $positionDy, width: $width, height: $height, isPinnedToScreen: $isPinnedToScreen, opacity: $opacity)';
+  return 'DraggableComponentSettings(id: $id, positionDx: $positionDx, positionDy: $positionDy, isPinnedToScreen: $isPinnedToScreen, width: $width, height: $height, opacity: $opacity)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $DraggableComponentSettingsCopyWith<$Res>  {
   factory $DraggableComponentSettingsCopyWith(DraggableComponentSettings value, $Res Function(DraggableComponentSettings) _then) = _$DraggableComponentSettingsCopyWithImpl;
 @useResult
 $Res call({
- Components id, double positionDx, double positionDy, double? width, double? height, bool isPinnedToScreen, double opacity
+ Components id, double positionDx, double positionDy, bool isPinnedToScreen, double width, double height, double opacity
 });
 
 
@@ -65,15 +65,15 @@ class _$DraggableComponentSettingsCopyWithImpl<$Res>
 
 /// Create a copy of DraggableComponentSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? positionDx = null,Object? positionDy = null,Object? width = freezed,Object? height = freezed,Object? isPinnedToScreen = null,Object? opacity = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? positionDx = null,Object? positionDy = null,Object? isPinnedToScreen = null,Object? width = null,Object? height = null,Object? opacity = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as Components,positionDx: null == positionDx ? _self.positionDx : positionDx // ignore: cast_nullable_to_non_nullable
 as double,positionDy: null == positionDy ? _self.positionDy : positionDy // ignore: cast_nullable_to_non_nullable
-as double,width: freezed == width ? _self.width : width // ignore: cast_nullable_to_non_nullable
-as double?,height: freezed == height ? _self.height : height // ignore: cast_nullable_to_non_nullable
-as double?,isPinnedToScreen: null == isPinnedToScreen ? _self.isPinnedToScreen : isPinnedToScreen // ignore: cast_nullable_to_non_nullable
-as bool,opacity: null == opacity ? _self.opacity : opacity // ignore: cast_nullable_to_non_nullable
+as double,isPinnedToScreen: null == isPinnedToScreen ? _self.isPinnedToScreen : isPinnedToScreen // ignore: cast_nullable_to_non_nullable
+as bool,width: null == width ? _self.width : width // ignore: cast_nullable_to_non_nullable
+as double,height: null == height ? _self.height : height // ignore: cast_nullable_to_non_nullable
+as double,opacity: null == opacity ? _self.opacity : opacity // ignore: cast_nullable_to_non_nullable
 as double,
   ));
 }
@@ -159,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Components id,  double positionDx,  double positionDy,  double? width,  double? height,  bool isPinnedToScreen,  double opacity)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Components id,  double positionDx,  double positionDy,  bool isPinnedToScreen,  double width,  double height,  double opacity)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DraggableComponentSettings() when $default != null:
-return $default(_that.id,_that.positionDx,_that.positionDy,_that.width,_that.height,_that.isPinnedToScreen,_that.opacity);case _:
+return $default(_that.id,_that.positionDx,_that.positionDy,_that.isPinnedToScreen,_that.width,_that.height,_that.opacity);case _:
   return orElse();
 
 }
@@ -180,10 +180,10 @@ return $default(_that.id,_that.positionDx,_that.positionDy,_that.width,_that.hei
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Components id,  double positionDx,  double positionDy,  double? width,  double? height,  bool isPinnedToScreen,  double opacity)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Components id,  double positionDx,  double positionDy,  bool isPinnedToScreen,  double width,  double height,  double opacity)  $default,) {final _that = this;
 switch (_that) {
 case _DraggableComponentSettings():
-return $default(_that.id,_that.positionDx,_that.positionDy,_that.width,_that.height,_that.isPinnedToScreen,_that.opacity);case _:
+return $default(_that.id,_that.positionDx,_that.positionDy,_that.isPinnedToScreen,_that.width,_that.height,_that.opacity);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -200,10 +200,10 @@ return $default(_that.id,_that.positionDx,_that.positionDy,_that.width,_that.hei
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Components id,  double positionDx,  double positionDy,  double? width,  double? height,  bool isPinnedToScreen,  double opacity)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Components id,  double positionDx,  double positionDy,  bool isPinnedToScreen,  double width,  double height,  double opacity)?  $default,) {final _that = this;
 switch (_that) {
 case _DraggableComponentSettings() when $default != null:
-return $default(_that.id,_that.positionDx,_that.positionDy,_that.width,_that.height,_that.isPinnedToScreen,_that.opacity);case _:
+return $default(_that.id,_that.positionDx,_that.positionDy,_that.isPinnedToScreen,_that.width,_that.height,_that.opacity);case _:
   return null;
 
 }
@@ -215,15 +215,15 @@ return $default(_that.id,_that.positionDx,_that.positionDy,_that.width,_that.hei
 @JsonSerializable()
 
 class _DraggableComponentSettings implements DraggableComponentSettings {
-  const _DraggableComponentSettings({required this.id, required this.positionDx, required this.positionDy, this.width, this.height, required this.isPinnedToScreen, this.opacity = 1.0});
+  const _DraggableComponentSettings({required this.id, required this.positionDx, required this.positionDy, required this.isPinnedToScreen, this.width = 300.0, this.height = 250.0, this.opacity = 1.0});
   factory _DraggableComponentSettings.fromJson(Map<String, dynamic> json) => _$DraggableComponentSettingsFromJson(json);
 
 @override final  Components id;
 @override final  double positionDx;
 @override final  double positionDy;
-@override final  double? width;
-@override final  double? height;
 @override final  bool isPinnedToScreen;
+@override@JsonKey() final  double width;
+@override@JsonKey() final  double height;
 @override@JsonKey() final  double opacity;
 
 /// Create a copy of DraggableComponentSettings
@@ -239,16 +239,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DraggableComponentSettings&&(identical(other.id, id) || other.id == id)&&(identical(other.positionDx, positionDx) || other.positionDx == positionDx)&&(identical(other.positionDy, positionDy) || other.positionDy == positionDy)&&(identical(other.width, width) || other.width == width)&&(identical(other.height, height) || other.height == height)&&(identical(other.isPinnedToScreen, isPinnedToScreen) || other.isPinnedToScreen == isPinnedToScreen)&&(identical(other.opacity, opacity) || other.opacity == opacity));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DraggableComponentSettings&&(identical(other.id, id) || other.id == id)&&(identical(other.positionDx, positionDx) || other.positionDx == positionDx)&&(identical(other.positionDy, positionDy) || other.positionDy == positionDy)&&(identical(other.isPinnedToScreen, isPinnedToScreen) || other.isPinnedToScreen == isPinnedToScreen)&&(identical(other.width, width) || other.width == width)&&(identical(other.height, height) || other.height == height)&&(identical(other.opacity, opacity) || other.opacity == opacity));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,positionDx,positionDy,width,height,isPinnedToScreen,opacity);
+int get hashCode => Object.hash(runtimeType,id,positionDx,positionDy,isPinnedToScreen,width,height,opacity);
 
 @override
 String toString() {
-  return 'DraggableComponentSettings(id: $id, positionDx: $positionDx, positionDy: $positionDy, width: $width, height: $height, isPinnedToScreen: $isPinnedToScreen, opacity: $opacity)';
+  return 'DraggableComponentSettings(id: $id, positionDx: $positionDx, positionDy: $positionDy, isPinnedToScreen: $isPinnedToScreen, width: $width, height: $height, opacity: $opacity)';
 }
 
 
@@ -259,7 +259,7 @@ abstract mixin class _$DraggableComponentSettingsCopyWith<$Res> implements $Drag
   factory _$DraggableComponentSettingsCopyWith(_DraggableComponentSettings value, $Res Function(_DraggableComponentSettings) _then) = __$DraggableComponentSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- Components id, double positionDx, double positionDy, double? width, double? height, bool isPinnedToScreen, double opacity
+ Components id, double positionDx, double positionDy, bool isPinnedToScreen, double width, double height, double opacity
 });
 
 
@@ -276,15 +276,15 @@ class __$DraggableComponentSettingsCopyWithImpl<$Res>
 
 /// Create a copy of DraggableComponentSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? positionDx = null,Object? positionDy = null,Object? width = freezed,Object? height = freezed,Object? isPinnedToScreen = null,Object? opacity = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? positionDx = null,Object? positionDy = null,Object? isPinnedToScreen = null,Object? width = null,Object? height = null,Object? opacity = null,}) {
   return _then(_DraggableComponentSettings(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as Components,positionDx: null == positionDx ? _self.positionDx : positionDx // ignore: cast_nullable_to_non_nullable
 as double,positionDy: null == positionDy ? _self.positionDy : positionDy // ignore: cast_nullable_to_non_nullable
-as double,width: freezed == width ? _self.width : width // ignore: cast_nullable_to_non_nullable
-as double?,height: freezed == height ? _self.height : height // ignore: cast_nullable_to_non_nullable
-as double?,isPinnedToScreen: null == isPinnedToScreen ? _self.isPinnedToScreen : isPinnedToScreen // ignore: cast_nullable_to_non_nullable
-as bool,opacity: null == opacity ? _self.opacity : opacity // ignore: cast_nullable_to_non_nullable
+as double,isPinnedToScreen: null == isPinnedToScreen ? _self.isPinnedToScreen : isPinnedToScreen // ignore: cast_nullable_to_non_nullable
+as bool,width: null == width ? _self.width : width // ignore: cast_nullable_to_non_nullable
+as double,height: null == height ? _self.height : height // ignore: cast_nullable_to_non_nullable
+as double,opacity: null == opacity ? _self.opacity : opacity // ignore: cast_nullable_to_non_nullable
 as double,
   ));
 }

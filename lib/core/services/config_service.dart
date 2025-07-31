@@ -23,20 +23,26 @@ class ConfigService {
     componentSettings: [
       DraggableComponentSettings(
         id: Components.selectedTask,
-        positionDx: 50,
-        positionDy: 100,
+        positionDx: 400,
+        positionDy: 90,
         isPinnedToScreen: false,
       ),
       DraggableComponentSettings(
+        id: Components.selectedTaskDetails,
+        positionDx: 400,
+        positionDy: 600,
+        isPinnedToScreen: true,
+      ),
+      DraggableComponentSettings(
         id: Components.taskList,
-        positionDx: 250,
+        positionDx: 850,
         positionDy: 300,
         isPinnedToScreen: true,
       ),
       DraggableComponentSettings(
         id: Components.map,
-        positionDx: 150,
-        positionDy: 200,
+        positionDx: 400,
+        positionDy: 300,
         isPinnedToScreen: true,
         width: 400,
       ),
@@ -56,7 +62,9 @@ class ConfigService {
     }
 
     if (!await file.exists()) {
-      await file.writeAsString(jsonEncode(defaultConfig.toJson()));
+      final jsonMap = defaultConfig.toJson();
+      print(jsonMap);
+      await file.writeAsString(jsonEncode(jsonMap));
       print('[ConfigService] Created default config at $configPath');
     }
 

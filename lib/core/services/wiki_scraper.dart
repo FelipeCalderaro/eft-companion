@@ -51,7 +51,7 @@ class WikiScraperService extends ScraperService {
       // Search for numbers inside the Table Row
       // if one is parsed means that is the amount
       for (var element in tds) {
-        quantity ??= int.tryParse(element.text.trim());
+        quantity ??= int.tryParse(element.text.replaceAll(',', '').trim());
       }
 
       /// Look for the text containing Yes, for now means

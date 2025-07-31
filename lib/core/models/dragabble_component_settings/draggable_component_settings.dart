@@ -10,9 +10,9 @@ abstract class DraggableComponentSettings with _$DraggableComponentSettings {
     required final Components id,
     required final double positionDx,
     required final double positionDy,
-    final double? width,
-    final double? height,
     required final bool isPinnedToScreen,
+    @Default(300.0) final double width,
+    @Default(250.0) final double height,
     @Default(1.0) final double opacity,
   }) = _DraggableComponentSettings;
 

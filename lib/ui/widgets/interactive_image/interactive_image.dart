@@ -4,7 +4,13 @@ import 'package:tarkov_desktop/core/constants.dart';
 class InteractiveImage extends StatefulWidget {
   final List<String> imageUrls;
   final Size? size;
-  const InteractiveImage({super.key, required this.imageUrls, this.size});
+  final List<TransformationController> controllers;
+  const InteractiveImage({
+    super.key,
+    required this.imageUrls,
+    this.size,
+    required this.controllers,
+  });
 
   @override
   State<InteractiveImage> createState() => _InteractiveImageState();
@@ -32,6 +38,7 @@ class _InteractiveImageState extends State<InteractiveImage> {
         onSecondaryTap: () => handle(false),
         child: InteractiveViewer(
           maxScale: 10,
+          transformationController: widget.controllers[index],
           scaleFactor: Constants.mouseWheelScaleFactor,
           child: Image.network(widget.imageUrls[index], fit: BoxFit.contain),
         ),
